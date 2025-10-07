@@ -1,0 +1,31 @@
+#audio-player {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    background: black;
+    color: white;
+    padding: 0.8rem 1rem;
+    border-top: 1px solid #444;
+}
+
+.control-btn {
+    background: transparent;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.control-btn:hover {
+    background: #666;
+}
+
+.hidden {
+    display: none;
+}
+
+.player-volume input {
+    width: 100px;
+}
