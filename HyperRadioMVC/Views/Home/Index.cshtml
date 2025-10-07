@@ -1,0 +1,12 @@
+﻿@model HyperRadioMVC.Models.ArtistProfile
+@{
+    ViewData["Title"] = "Hyper Radio";
+}
+
+<body class="bg-danger text-white">
+
+<div class="container py-5">
+    @await Html.PartialAsync("_ArtistProfile", Model)
+</div>
+
+</body>

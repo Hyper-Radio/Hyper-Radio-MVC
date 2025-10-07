@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>@ViewData["Title"] - HyperRadioMVC</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/HyperRadioMVC.styles.css" asp-append-version="true"/>
+    <style>
+        /* Fixed top navbar */
+        header.masthead {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            background-color: black;
+        }
+
+        .masthead .btn-outline-white {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            transition: all 0.3s ease;
+        }
+
+        .masthead .btn-outline-white:hover {
+            border-color: #2ecc71;
+            color: #2ecc71;
+        }
+
+        .masthead .masthead-brand {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 0;
+        }
+
+        main {
+            padding-top: 100px; /* space for fixed navbar */
+            padding-bottom: 80px; /* space for fixed footer */
+        }
+
+        /* Footer styling */
+        footer.footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            background-color: black;
+        }
+
+        footer.footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        footer.footer a:hover {
+            color: #2ecc71;
+        }
+    </style>
+</head>
+<body class="text-white">
+
+<header class="masthead py-3  fixed-top bg-black" style="height:70px;">
+    <div class="container d-flex justify-content-between align-items-center">
+
+        <!-- Left: Dropdown Channel Selector -->
+        <div class="dropdown">
+            <button class="btn btn-dark dropdown-toggle text-white" type="button" id="channelDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                Select Channel
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="channelDropdown">
+                <li><a class="dropdown-item" href="#">Channel 1</a></li>
+                <li><a class="dropdown-item" href="#">Channel 2</a></li>
+                <li><a class="dropdown-item" href="#">Channel 3</a></li>
+            </ul>
+        </div>
+
+        <!-- Center: Logo / Brand -->
+        <h1 class="masthead-brand text-white">Hyper Radio</h1>
+
+        <!-- Right: Outline Button -->
+        <div>
+            <button class="btn btn-outline-white">Pitch a Track</button>
+        </div>
+
+    </div>
+</header>
+
+<div class="container">
+    <main role="main">
+        @RenderBody()
+    </main>
+</div>
+
+<footer class="footer bg-black text-white py-3 fixed-bottom" style="height:60px;">
+    <div class="container d-flex justify-content-between align-items-center">
+        <a href="/" class="btn btn-outline-primary text-white">Dynamic Playing Now</a>
+        <a href="/" class="btn btn-outline-primary text-white">Dynamic Radio Controls</a>
+        <a href="/" class="btn btn-outline-primary text-white">Dynamic Volume Controls</a>
+    </div>
+</footer>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
