@@ -26,12 +26,16 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9Qcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/Views/Shared/Error.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL0Vycm9yLmNzaHRtbA==
+[/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/Views/Pitch/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvUGl0Y2gvSW5kZXguY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/Views/Shared/_ArtistProfile.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19BcnRpc3RQcm9maWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/Views/Shared/_AudioPlayer.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvU2hhcmVkL19BdWRpb1BsYXllci5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
 [/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/Views/Shared/_ValidationScriptsPartial.cshtml]

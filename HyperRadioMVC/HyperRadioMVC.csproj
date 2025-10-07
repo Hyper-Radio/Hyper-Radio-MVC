@@ -7,8 +7,13 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Folder Include="Pages\" />
       <Folder Include="Services\" />
       <Folder Include="Views\Shared\Components\" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="NAudio" Version="2.2.1" />
     </ItemGroup>
 
 </Project>
