@@ -1,74 +1,69 @@
-.artist-profile {
-    position: relative;
-    min-height: 100vh;
-    background-color: #c0392b; /* deep red background */
-    overflow: hidden;
+/* Fill the main content completely */
+.artist-profile-container {
+    flex: 1 1 auto;  /* fill available space inside main */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #8B0000;
+    gap: 20px;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
-/* Left text box for desktop */
-.artist-text-box {
-    position: absolute;
-    top: 50%;
-    left: 5%;
-    transform: translateY(-50%);
-    width: 35%;
-    background-color: rgba(0, 0, 0, 0.4);
-    border-radius: 10px;
-    padding: 2rem;
-    color: #fff;
-    z-index: 2;
-}
-
-/* Center Image */
-.artist-image-container {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-}
-
+/* Image container */
 .artist-image {
-    max-width: 60%;
-    opacity: 0.8;
-    border-radius: 15px;
+    position: relative;
+    flex: 1 1 400px;
+    max-width: 500px;
+    text-align: center;
 }
 
-/* Title near bottom (mobile only) */
-.artist-title {
-    position: absolute;
-    bottom: 3rem;
+.artist-image img {
     width: 100%;
-    text-align: center;
-    color: #fff;
-    font-size: 3rem;
+    height: auto;
+    opacity: 0.85;
+    border-radius: 10px;
+}
+
+/* Name overlay */
+.artist-name {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.5);
+    padding: 10px 20px;
+    border-radius: 5px;
+    font-size: 4.5rem;
     font-weight: bold;
+    color: white;
+}
+
+/* Description box */
+.artist-description {
+    flex: 1 1 400px;
+    max-width: 500px;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 20px;
+    border-radius: 10px;
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
 /* Responsive adjustments */
-@media (max-width: 768px) {
-    .artist-profile {
+@media (max-width: 900px) {
+    .artist-profile-container {
         flex-direction: column;
-        min-height: 60vh;
+        height: auto; /* allow wrapping */
     }
 
-    .artist-text-box {
-        position: relative;
-        transform: none;
-        width: 90%;
-        margin: 1rem auto;
-        top: auto;
-        left: auto;
+    .artist-description, .artist-image {
+        max-width: 90%;
     }
 
-    .artist-image {
-        max-width: 80%;
-        margin: 0 auto;
-        display: block;
-    }
-
-    .artist-title {
-        font-size: 2.5rem;
-        bottom: 2rem;
+    .artist-name {
+        font-size: 2rem;
+        bottom: 10px;
+        padding: 5px 10px;
     }
 }

@@ -257,6 +257,14 @@
       "PackagePath": "staticwebassets/lib/jquery/dist/jquery.min.map"
     },
     {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/logo.png",
+      "PackagePath": "staticwebassets/logo.png"
+    },
+    {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/logo.svg",
+      "PackagePath": "staticwebassets/logo.svg"
+    },
+    {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/song.mp3",
       "PackagePath": "staticwebassets/song.mp3"
     },

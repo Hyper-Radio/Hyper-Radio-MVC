@@ -1,102 +1,149 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - HyperRadioMVC</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true"/>
-    <link rel="stylesheet" href="~/HyperRadioMVC.styles.css" asp-append-version="true"/>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/HyperRadioMVC.styles.css" asp-append-version="true" />
+
     <style>
-        /* Fixed top navbar */
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            overflow-x: hidden;
+        }
+
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #cd1e1e;
+            color: white;
+        }
+
         header.masthead {
             position: fixed;
             top: 0;
             width: 100%;
+            height: 120px;
             z-index: 1000;
-            background-color: black;
         }
 
-        .masthead .btn-outline-white {
-            border: 2px solid white;
-            color: white;
-            background: transparent;
-            transition: all 0.3s ease;
+        .logo {
+            height: 100px;
+            width: auto;
         }
 
-        .masthead .btn-outline-white:hover {
-            border-color: #2ecc71;
-            color: #2ecc71;
-        }
-
-        .masthead .masthead-brand {
-            font-size: 2rem;
-            text-align: center;
-            margin-bottom: 0;
-        }
-
-        main {
-            padding-top: 100px; /* space for fixed navbar */
-            padding-bottom: 80px; /* space for fixed footer */
-        }
-
-        /* Footer styling */
+        /* Footer */
         .footer {
             position: fixed;
             bottom: 0;
             width: 100%;
-            background-color: green;
+            height: 80px;
+            background-color: black;
         }
-        
+
+        /* Main content area */
+        #main-content {
+            flex: 1;
+            margin-top: 70px; /* navbar height */
+            margin-bottom: 80px; /* footer height */
+            min-height: calc(100vh - 150px);
+        }
+
+        .loading-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+            color: white;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
     </style>
 </head>
-<body class="text-white">
+<body>
 
-<header class="masthead py-3  fixed-top bg-black" style="height:70px;">
+<header class="masthead py-3">
     <div class="container d-flex justify-content-between align-items-center">
-
-        <!-- Left: Dropdown Channel Selector -->
         <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle text-white" type="button" id="channelDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-dark dropdown-toggle text-white ajax-link" data-bs-toggle="dropdown" aria-expanded="false">
                 Select Channel
             </button>
-            <ul class="dropdown-menu" aria-labelledby="channelDropdown">
-                <li><a class="dropdown-item" href="#">Channel 1</a></li>
-                <li><a class="dropdown-item" href="#">Channel 2</a></li>
-                <li><a class="dropdown-item" href="#">Channel 3</a></li>
+            <ul class="dropdown-menu">
+                <li><a class="dropdown-item ajax-link" href="/Channel/1">Channel 1</a></li>
+                <li><a class="dropdown-item ajax-link" href="/Channel/2">Channel 2</a></li>
+                <li><a class="dropdown-item ajax-link" href="/Channel/3">Channel 3</a></li>
             </ul>
         </div>
+        
+        <a asp-controller="Home" asp-action="Index" class="ajax-link">
+        <img src="/logo.svg" alt="Hyper Radio" class="logo" />
+        </a>
 
-        <!-- Center: Logo / Brand -->
-        <h1 class="masthead-brand text-white">Hyper Radio</h1>
-
-        <!-- Right: Outline Button -->
         <div>
-            <a asp-controller="Pitch" asp-action="Index" class="btn btn-outline-white">Pitch a Track</a>
+            <a asp-controller="Pitch" asp-action="Index" class="btn btn-outline-light ajax-link">Pitch a Track</a>
         </div>
-
     </div>
 </header>
 
-<div class="container">
-    <main role="main">
-        @RenderBody()
-    </main>
-</div>
+<main id="main-content">
+    @RenderBody()
+</main>
 
-<footer class="footer" style="height:80px;">
+<footer class="footer">
     <div>
         @Html.Partial("_AudioPlayer")
     </div>
 </footer>
 
-
-//Script for the audio player
-<script src="~/js/player.js"></script>
-
+<div class="loading-overlay" id="loading">Loading...</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
 <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // 🔥 AJAX Page Loader
+    document.addEventListener("DOMContentLoaded", function () {
+        const mainContent = document.getElementById("main-content");
+        const loading = document.getElementById("loading");
+
+        // Function to load pages dynamically
+        function loadPage(url, pushState = true) {
+            loading.style.display = "flex";
+            fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
+                .then(res => res.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, "text/html");
+                    const newContent = doc.querySelector("#main-content").innerHTML;
+                    mainContent.innerHTML = newContent;
+                    if (pushState) window.history.pushState({}, "", url);
+                })
+                .catch(err => console.error(err))
+                .finally(() => loading.style.display = "none");
+        }
+
+        // Intercept AJAX link clicks
+        document.body.addEventListener("click", function (e) {
+            const link = e.target.closest("a.ajax-link");
+            if (link) {
+                e.preventDefault();
+                const url = link.getAttribute("href");
+                if (url) loadPage(url);
+            }
+        });
+
+        // Handle back/forward navigation
+        window.addEventListener("popstate", () => loadPage(window.location.pathname, false));
+    });
+</script>
+
+<script src="~/js/player.js"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
 @await RenderSectionAsync("Scripts", required: false)
 </body>

@@ -1,13 +1,24 @@
+@model HyperRadioMVC.Models.Track
+
 @{
 ViewData["Title"] = "Pitch";
 }
 
 
 
+<form>
+    
+    <input type="text" asp-for="Name"/>
+    <input type="text" asp-for="Description"/>
+    <input type="number" asp-for="Duration"/>
+    <input type="text" asp-for="ImageUrl"/>
+    <input type="text" asp-for="TrackUrl"/>
+    <input type="text" asp-for="Lyrics"/>
+
+    <button type="submit" class="btn btn-outline-primary">Submit</button>
+    <button  class="btn btn-outline-secondary">Cancel</button>
 
 
-<h1>
-    
-    PITCH A TRACK
-    
-</h1>
+</form>
+
+

@@ -1,23 +1,15 @@
 @model HyperRadioMVC.Models.ArtistProfile
-
 <link rel="stylesheet" href="~/css/artistprofile.css" asp-append-version="true" />
 
-<div class="artist-profile">
-
-    <!-- Center Image -->
-    <div class="artist-image-container">
-        <img src="@Model.ImageUrl" alt="@Model.Name" class="artist-image" />
+<div class="artist-profile-container">
+    <div class="artist-image">
+        <img src="@Model.ImageUrl" alt="@Model.Name" />
+        <div class="artist-name">
+            <h2>@Model.Name</h2>
+        </div>
     </div>
 
-    <!-- Left Text Box (desktop only) -->
-    <div class="artist-text-box d-none d-md-block">
-        <h2>@Model.Name</h2>
+    <div class="artist-description">
         <p>@Model.Description</p>
     </div>
-
-    <!-- Title (mobile or centered near bottom) -->
-    <div class="artist-title d-md-none">
-        <h1>@Model.Name</h1>
-    </div>
-
 </div>
