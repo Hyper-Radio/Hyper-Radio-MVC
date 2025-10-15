@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="~/css/trackpitch.css" asp-append-version="true" />
+
+
 @model HyperRadioMVC.Models.Track
 
 @{
@@ -5,20 +8,54 @@ ViewData["Title"] = "Pitch";
 }
 
 
+<div class="form">
 
-<form>
-    
-    <input type="text" asp-for="Name"/>
-    <input type="text" asp-for="Description"/>
-    <input type="number" asp-for="Duration"/>
-    <input type="text" asp-for="ImageUrl"/>
-    <input type="text" asp-for="TrackUrl"/>
-    <input type="text" asp-for="Lyrics"/>
+    <h1 class="mb-3 text-white form-title"> Track Submission Portal </h1>
 
-    <button type="submit" class="btn btn-outline-primary">Submit</button>
-    <button  class="btn btn-outline-secondary">Cancel</button>
+    <form class="form-body" asp-controller="Pitch" asp-action="SubmitForm" method="post">
+
+        <div class="mb-3 form-group">
+            <label asp-for="Name" class="form-label">Name</label>
+            <input type="text" asp-for="Name"/>
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-group">
+            <label asp-for="Description" class="form-label">Description</label>
+            <input type="text" asp-for="Description"/>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-group">
+            <label asp-for="ImageUrl" class="form-label">Image URL</label>
+            <input type="text" asp-for="ImageUrl"/>
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-group">
+            <label asp-for="TrackUrl" class="form-label">Track URL</label>
+            <input type="text" asp-for="TrackUrl"/>
+            <span asp-validation-for="TrackUrl" class="text-danger"></span>
+        </div>
+
+        <div class="mb-3 form-group ">
+            <label asp-for="Duration" class="form-label">Duration</label>
+            <input type="number" asp-for="Duration"/>
+            <span asp-validation-for="Duration" class="text-danger"></span>
+        </div>
 
 
-</form>
+        <div class="mb-3">
+            <label asp-for="Description" class="form-label">Tell Us More About Your Track</label>
+            <textarea class="form-control" id="Description" rows="3"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
 
 
+        <button type="submit" class="btn btn-outline-primary">Submit</button>
+        <button class="btn btn-outline-secondary">Cancel</button>
+
+
+    </form>
+
+</div>

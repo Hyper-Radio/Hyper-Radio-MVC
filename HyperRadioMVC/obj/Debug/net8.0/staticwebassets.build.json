@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "sob7teO34tO/6ch1OTGlR5DRF7yIpwyp8VVz0GmNjYQ=",
+  "Hash": "VKTapl3NQ0em9uFv7VTOtWA3B9L6AuNTduBoH0K+Z3c=",
   "Source": "HyperRadioMVC",
   "BasePath": "_content/HyperRadioMVC",
   "Mode": "Default",
@@ -112,12 +112,12 @@
       "OriginalItemSpec": "wwwroot/css/site.css"
     },
     {
-      "Identity": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/favicon.ico",
+      "Identity": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/trackpitch.css",
       "SourceId": "HyperRadioMVC",
       "SourceType": "Discovered",
       "ContentRoot": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/",
       "BasePath": "_content/HyperRadioMVC",
-      "RelativePath": "favicon.ico",
+      "RelativePath": "css/trackpitch.css",
       "AssetKind": "All",
       "AssetMode": "All",
       "AssetRole": "Primary",
@@ -128,7 +128,26 @@
       "AssetTraitValue": "",
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
-      "OriginalItemSpec": "wwwroot/favicon.ico"
+      "OriginalItemSpec": "wwwroot/css/trackpitch.css"
+    },
+    {
+      "Identity": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/favicon.svg",
+      "SourceId": "HyperRadioMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/",
+      "BasePath": "_content/HyperRadioMVC",
+      "RelativePath": "favicon.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/favicon.svg"
     },
     {
       "Identity": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/js/player.js",

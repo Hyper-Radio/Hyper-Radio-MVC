@@ -1,0 +1,21 @@
+
+
+.form{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    margin-top: 90px;
+    overflow: visible;
+}
+
+
+.form-title{
+    display: flex;
+    align-content: center;
+    justify-content: center;
+}
+
+.form-body{
+    align-content: center;
+    justify-content: center;
+}

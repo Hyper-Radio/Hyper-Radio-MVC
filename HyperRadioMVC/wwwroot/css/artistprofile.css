@@ -1,6 +1,6 @@
 /* Fill the main content completely */
 .artist-profile-container {
-    flex: 1 1 auto;  /* fill available space inside main */
+    flex: 1 1 auto;  
     display: flex;
     align-items: center;
     justify-content: center;
@@ -14,7 +14,7 @@
 .artist-image {
     position: relative;
     flex: 1 1 400px;
-    max-width: 500px;
+    max-width: 600px;
     text-align: center;
 }
 
@@ -34,15 +34,15 @@
     background: rgba(0, 0, 0, 0.5);
     padding: 10px 20px;
     border-radius: 5px;
-    font-size: 4.5rem;
+    font-size: 7.5rem;
     font-weight: bold;
     color: white;
 }
 
 /* Description box */
 .artist-description {
-    flex: 1 1 400px;
-    max-width: 500px;
+    flex: 1 1 200px;
+    max-width: 400px;
     background-color: rgba(0, 0, 0, 0.6);
     padding: 20px;
     border-radius: 10px;

@@ -17,8 +17,12 @@
       "PackagePath": "staticwebassets/css/site.css"
     },
     {
-      "Id": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/favicon.ico",
-      "PackagePath": "staticwebassets/favicon.ico"
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/trackpitch.css",
+      "PackagePath": "staticwebassets/css/trackpitch.css"
+    },
+    {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/favicon.svg",
+      "PackagePath": "staticwebassets/favicon.svg"
     },
     {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/js/player.js",
