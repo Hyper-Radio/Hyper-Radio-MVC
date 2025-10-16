@@ -1,28 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HLS Audio Player</title>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <link rel="stylesheet" href="~/css/audioplayer.css" />
+</head>
 
-
-<link rel="stylesheet" href="~/css/audioplayer.css" />
-
-
+<body>
 <div id="audio-player">
+    <audio id="audioPlayer"></audio>
 
-    <audio src="http://localhost:5231/hls/track1/index.m3u8"></audio>
-    
     <div id="now-playing" class="now-playing">
         <span id="song-title">Now Playing:</span>
         <strong id="song-name">Sample Song</strong>
-        <p id="artist-name"> Artist name </p>
+        <p id="artist-name">Artist name</p>
     </div>
 
     <div class="player-controls">
         <button id="play-btn" class="control-btn">Play</button>
-        <button id="pause-btn" class="control-btn hidden">️Pause</button>
+        <button id="pause-btn" class="control-btn hidden">Pause</button>
     </div>
 
     <div class="player-volume">
-        <input id="volume" type="range" min="0" max="1" step="0.1"/>
+        <input id="volume" type="range" min="0" max="1" step="0.1" value="1" />
     </div>
-
-
 </div>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const audio = document.getElementById('audioPlayer');
+        const playBtn = document.getElementById('play-btn');
+        const pauseBtn = document.getElementById('pause-btn');
+        const volumeSlider = document.getElementById('volume');
+        const hlsUrl = 'http://localhost:5118/Hls/playlistdemo/playlist.m3u8';
 
+        // Setup HLS
+        if (Hls.isSupported()) {
+            const hls = new Hls();
+            hls.loadSource(hlsUrl);
+            hls.attachMedia(audio);
+        } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+            // Safari support
+            audio.src = hlsUrl;
+        } else {
+            console.error('HLS not supported in this browser');
+        }
+
+        // Play / Pause buttons
+        playBtn.addEventListener('click', function () {
+            audio.play().catch(err => console.warn('Play failed:', err));
+            playBtn.classList.add('hidden');
+            pauseBtn.classList.remove('hidden');
+        });
+
+        pauseBtn.addEventListener('click', function () {
+            audio.pause();
+            pauseBtn.classList.add('hidden');
+            playBtn.classList.remove('hidden');
+        });
+
+        // Volume control
+        volumeSlider.addEventListener('input', function () {
+            audio.volume = parseFloat(volumeSlider.value);
+        });
+    });
+</script>
+</body>
+</html>
