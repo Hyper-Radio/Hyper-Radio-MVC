@@ -1,11 +1,7 @@
-using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
+namespace HyperRadioMVC.ViewModels;
 
-namespace HyperRadioMVC.Models;
-
-public class Track
+public class CreatePitchVM
 {
-    public int Id { get; set; }
     public string Title { get; set; }
     public int ReleaseYear { get; set; }
     public string Genre { get; set; }

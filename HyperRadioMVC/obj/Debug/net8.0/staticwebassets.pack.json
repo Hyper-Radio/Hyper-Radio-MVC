@@ -1,20 +1,12 @@
 {
   "Files": [
     {
-      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/scopedcss/projectbundle/HyperRadioMVC.bundle.scp.css",
-      "PackagePath": "staticwebassets/HyperRadioMVC.bundle.scp.css"
-    },
-    {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/artistprofile.css",
       "PackagePath": "staticwebassets/css/artistprofile.css"
     },
     {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/audioplayer.css",
       "PackagePath": "staticwebassets/css/audioplayer.css"
-    },
-    {
-      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/site.css",
-      "PackagePath": "staticwebassets/css/site.css"
     },
     {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/trackpitch.css",

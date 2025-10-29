@@ -97,9 +97,7 @@
 /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/staticwebassets/msbuild.buildMultiTargeting.HyperRadioMVC.props
 /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/staticwebassets/msbuild.buildTransitive.HyperRadioMVC.props
 /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/staticwebassets.pack.json
-/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/scopedcss/Views/Shared/_Layout.cshtml.rz.scp.css
 /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/scopedcss/bundle/HyperRadioMVC.styles.css
-/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/scopedcss/projectbundle/HyperRadioMVC.bundle.scp.css
 /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/HyperRad.1302A870.Up2Date
 /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/HyperRadioMVC.dll
 /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/Debug/net8.0/refint/HyperRadioMVC.dll
