@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj": {}
+    "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj": {}
   },
   "projects": {
-    "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj": {
+    "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj",
+        "projectUniqueName": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj",
         "projectName": "HyperRadioMVC",
-        "projectPath": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj",
+        "projectPath": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/HyperRadioMVC.csproj",
         "packagesPath": "/Users/joshuang/.nuget/packages/",
-        "outputPath": "/Users/joshuang/Desktop/Programming/Hyper-Radio-MVC/HyperRadioMVC/obj/",
+        "outputPath": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/joshuang/.nuget/NuGet/NuGet.Config"

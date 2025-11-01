@@ -2,12 +2,14 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HyperRadioMVC.Controllers;
 
-public class Pitch : Controller
+public class StationManager : Controller
 {
-    
+
+
     public IActionResult Index()
     {
-
         return View();
     }
+    
+    
 }

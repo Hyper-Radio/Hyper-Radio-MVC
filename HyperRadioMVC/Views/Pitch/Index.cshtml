@@ -1,61 +1,63 @@
 <link rel="stylesheet" href="~/css/trackpitch.css" asp-append-version="true" />
 
-
-@model HyperRadioMVC.Models.Track
+@model HyperRadioMVC.ViewModels.CreateTrackVM
 
 @{
 ViewData["Title"] = "Pitch";
 }
 
-
 <div class="form">
+    <h1 class="form-title"> Track Submission Portal</h1>
 
-    <h1 class="mb-3 text-white form-title"> Track Submission Portal </h1>
+    <form class="form-body" action="http://localhost:5054/api/Tracks/upload" method="post" enctype="multipart/form-data">
+        
+        <div class="submit-form">
+            <h4 class="submit-form-header">
+                Basic Track Info
+            </h4>
+            <div class="mb-3">
+                <label asp-for="Title" class="form-label">Track Name</label>
+                <input type="text" asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
 
-    <form class="form-body" asp-controller="Pitch" asp-action="SubmitForm" method="post">
+            <div class="mb-3">
+                <label asp-for="Description" class="form-label">Description</label>
+                <input type="text" asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
 
-        <div class="mb-3 form-group">
-            <label asp-for="Name" class="form-label">Name</label>
-            <input type="text" asp-for="Name"/>
-            <span asp-validation-for="Name" class="text-danger"></span>
+            <div class="mb-3">
+                <label asp-for="Genre" class="form-label">Genre</label>
+                <select asp-for="Genre" class="form-select">
+                    <option value="">Select a genre</option>
+                    <option>Hip-Hop</option>
+                    <option>Electronic</option>
+                    <option>Pop</option>
+                    <option>Rock</option>
+                    <option>Jazz</option>
+                    <option>Experimental</option>
+                    <option>Other</option>
+                </select>
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+            <div class="mb-3">
+                <label asp-for="ReleaseYear" class="form-label">Release Year</label>
+                <input type="number" asp-for="ReleaseYear" class="form-control" min="1900" max="@DateTime.Now.Year" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="File" class="form-label">Track Upload</label>
+                <input type="file" asp-for="File" class="form-control" accept="audio/*" />
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="ImageURL" class="form-label">Image URL</label>
+                <input type="text" asp-for="ImageURL" class="form-control" />
+            </div>
         </div>
-
-        <div class="mb-3 form-group">
-            <label asp-for="Description" class="form-label">Description</label>
-            <input type="text" asp-for="Description"/>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3 form-group">
-            <label asp-for="ImageUrl" class="form-label">Image URL</label>
-            <input type="text" asp-for="ImageUrl"/>
-            <span asp-validation-for="ImageUrl" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3 form-group">
-            <label asp-for="TrackUrl" class="form-label">Track URL</label>
-            <input type="text" asp-for="TrackUrl"/>
-            <span asp-validation-for="TrackUrl" class="text-danger"></span>
-        </div>
-
-        <div class="mb-3 form-group ">
-            <label asp-for="Duration" class="form-label">Duration</label>
-            <input type="number" asp-for="Duration"/>
-            <span asp-validation-for="Duration" class="text-danger"></span>
-        </div>
-
-
-        <div class="mb-3">
-            <label asp-for="Description" class="form-label">Tell Us More About Your Track</label>
-            <textarea class="form-control" id="Description" rows="3"></textarea>
-            <span asp-validation-for="Description" class="text-danger"></span>
-        </div>
-
-
-        <button type="submit" class="btn btn-outline-primary">Submit</button>
-        <button class="btn btn-outline-secondary">Cancel</button>
-
-
+        
+        <button class="btn btn-primary" type="submit">Submit</button>
+        
     </form>
-
 </div>
