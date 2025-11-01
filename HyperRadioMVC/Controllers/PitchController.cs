@@ -21,16 +21,5 @@ public class PitchController : Controller
     {
         return View();
     }
-
     
-    [HttpPost]
-    public async Task<IActionResult> Create(CreatePitchVM pitch)
-    {
-        if (!ModelState.IsValid)
-            return View(pitch);
-
-        await _client.PostAsJsonAsync("upload",pitch);
-        
-        return RedirectToAction("Index");
-    }
 }

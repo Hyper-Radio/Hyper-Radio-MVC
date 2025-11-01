@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="~/css/trackpitch.css" asp-append-version="true" />
 
-@model HyperRadioMVC.ViewModels.CreatePitchVM
+@model HyperRadioMVC.ViewModels.CreateTrackVM
 
 @{
 ViewData["Title"] = "Pitch";
@@ -47,8 +47,8 @@ ViewData["Title"] = "Pitch";
             </div>
 
             <div class="mb-3">
-                <label asp-for="TrackURL" class="form-label">Track Upload</label>
-                <input type="file" asp-for="TrackURL" class="form-control" accept="audio/*" />
+                <label asp-for="File" class="form-label">Track Upload</label>
+                <input type="file" asp-for="File" class="form-control" accept="audio/*" />
             </div>
 
             <div class="mb-3">
