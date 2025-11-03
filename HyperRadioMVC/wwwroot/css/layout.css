@@ -1,0 +1,33 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 40px;        /* shorthand for left/right padding */
+    height: 120px;          /* adjust as needed for logo size */
+    background-color: black; /* optional, ensure it covers content behind */
+    position: fixed;        /* stick to top */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;          /* ensure it stays above other elements */
+    box-sizing: border-box; /* include padding in width */
+}
+
+/* Optional: logo styling */
+.logo {
+    height: 100px;  /* adjust logo size */
+    width: auto;
+}
+
+/* Optional: links inside navbar */
+.navbar div a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px; /* spacing between links */
+    font-weight: bold;
+}
+
+/* Optional: add hover effect */
+.navbar div a:hover {
+    color: #1db954; /* accent color example */
+}
