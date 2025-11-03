@@ -1,8 +1,11 @@
-@model dynamic
+@model ShowDetailsVM
 
 @{
     ViewBag.Title = "title";
     Layout = "_Layout";
 }
 
-<h2>About Page</h2>
+<div class="container">
+    <h2>About Page</h2>
+    @await Html.PartialAsync("_ShowDetails", Model);
+</div>
