@@ -14,7 +14,7 @@ public class Program
         //ADD Http client so that it can connect to api
         builder.Services.AddHttpClient("Hyper-Radio.API", client =>
         {
-            client.BaseAddress = new Uri("http://localhost:5054/api/");
+            client.BaseAddress = new Uri("http://localhost:5054/api/"); //remember to change this 
         });
 
         

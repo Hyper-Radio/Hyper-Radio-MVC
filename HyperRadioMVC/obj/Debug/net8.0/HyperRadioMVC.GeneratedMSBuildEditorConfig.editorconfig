@@ -18,6 +18,14 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = /Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC
 build_property._RazorSourceGeneratorDebug = 
 
+[/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/Pages/Show/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXMvU2hvdy9JbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/Views/About/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3MvQWJvdXQvSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
 [/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3MvSG9tZS9JbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 

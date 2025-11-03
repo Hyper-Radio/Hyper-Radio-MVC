@@ -9,7 +9,7 @@
 
 <body>
 <div id="audio-player">
-    <audio id="audioPlayer"></audio>
+    <audio id="audio" controls autoplay></audio>
 
     <div id="now-playing" class="now-playing">
         <span id="song-title">Now Playing:</span>
@@ -27,50 +27,24 @@
     </div>
 </div>
 
+
+
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        const audio = document.getElementById("audioPlayer");
-        const streamUrl = "https://localhost:5054/api/stream/live.m3u8"; // ✅ your backend endpoint
+    const audio = document.getElementById('audio');
+    const src = 'http://localhost:5118/api/stream/live.m3u8';
 
-        // ✅ Many modern browsers can play audio HLS natively
-        if (audio.canPlayType("application/vnd.apple.mpegurl")) {
-            audio.src = streamUrl;
+    if (Hls.isSupported()) {
+        const hls = new Hls();
+        hls.loadSource(src);
+        hls.attachMedia(audio);
+        hls.on(Hls.Events.MANIFEST_PARSED, () => {
             audio.play();
-        } else {
-            // For browsers that don't support HLS natively (like Chrome), use hls.js
-            const script = document.createElement('script');
-            script.src = "https://cdn.jsdelivr.net/npm/hls.js@latest";
-            script.onload = () => {
-                if (Hls.isSupported()) {
-                    const hls = new Hls();
-                    hls.loadSource(streamUrl);
-                    hls.attachMedia(audio);
-                    hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play());
-                } else {
-                    alert("Your browser does not support HLS audio streaming.");
-                }
-            };
-            document.body.appendChild(script);
-        }
- 
-        // Play / Pause buttons
-        playBtn.addEventListener('click', function () {
-            audio.play().catch(err => console.warn('Play failed:', err));
-            playBtn.classList.add('hidden');
-            pauseBtn.classList.remove('hidden');
         });
-
-        pauseBtn.addEventListener('click', function () {
-            audio.pause();
-            pauseBtn.classList.add('hidden');
-            playBtn.classList.remove('hidden');
-        });
-
-        // Volume control
-        volumeSlider.addEventListener('input', function () {
-            audio.volume = parseFloat(volumeSlider.value);
-        });
-    });
+    } else if (audio.canPlayType('application/vnd.apple.mpegurl')) {
+        // Safari & iOS
+        audio.src = src;
+        audio.play();
+    }
 </script>
 </body>
 </html>

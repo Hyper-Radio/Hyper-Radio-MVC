@@ -12,14 +12,17 @@ public class PitchController : Controller
     {
         _client = clientFactory.CreateClient("Hyper-Radio-API");
     }
-
-
     
-    //CREATE TABLE
+    //CREATE FORM
     [HttpGet]
     public IActionResult Index()
     {
         return View();
     }
+    
+    
+    //Succesfully 
+    
+    
     
 }
