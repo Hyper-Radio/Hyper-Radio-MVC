@@ -3,11 +3,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Hyper Radio</title>
+    <title>@ViewData["Title"] Hyper Radio</title>
     <link rel="icon" type="image/x-icon" href="~/favicon.svg" />
-    
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/HyperRadioMVC.styles.css" asp-append-version="true" />
 
     <style>
@@ -15,13 +12,14 @@
             margin: 0;
             padding: 0;
             height: 100%;
-            overflow-x: hidden;
+            overflow-x:  hidden;
+            overflow-y:  visible;
         }
 
         body {
             display: flex;
             flex-direction: column;
-            background-color: #8B0000;
+            background-color: black;
             color: white;
         }
 
@@ -71,23 +69,16 @@
 
 <header class="masthead py-3">
     <div class="container d-flex justify-content-between align-items-center">
-        <div class="dropdown">
-            <button class="btn btn-dark dropdown-toggle text-white ajax-link" data-bs-toggle="dropdown" aria-expanded="false">
-                Select Channel
-            </button>
-            <ul class="dropdown-menu">
-                <li><a class="dropdown-item ajax-link" href="/Channel/1">Channel 1</a></li>
-                <li><a class="dropdown-item ajax-link" href="/Channel/2">Channel 2</a></li>
-                <li><a class="dropdown-item ajax-link" href="/Channel/3">Channel 3</a></li>
-            </ul>
-        </div>
+       
         
         <a asp-controller="Home" asp-action="Index" class="ajax-link">
         <img src="/logo.svg" alt="Hyper Radio" class="logo" />
         </a>
 
         <div>
-            <a asp-controller="Pitch" asp-action="Index" class="btn btn-outline-light ajax-link">Pitch a Track</a>
+            <a asp-controller="About" asp-action="Index" class="btn btn-outline-light ajax-link">ABOUT</a>
+            <a asp-controller="Pitch" asp-action="Index" class="btn btn-outline-light ajax-link">SCHEDULE</a>
+            <a asp-controller="Pitch" asp-action="Index" class="btn btn-outline-light ajax-link">PITCH</a>
         </div>
     </div>
 </header>

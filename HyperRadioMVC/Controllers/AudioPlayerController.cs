@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HyperRadioMVC.Controllers;
 
-public class AudioPlayer : Controller
+public class AudioPlayerController : Controller
 {
 
     public IActionResult Index()
