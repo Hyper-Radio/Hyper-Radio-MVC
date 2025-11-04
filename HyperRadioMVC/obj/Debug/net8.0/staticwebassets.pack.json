@@ -1,6 +1,10 @@
 {
   "Files": [
     {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/about.css",
+      "PackagePath": "staticwebassets/css/about.css"
+    },
+    {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/artistprofile.css",
       "PackagePath": "staticwebassets/css/artistprofile.css"
     },
