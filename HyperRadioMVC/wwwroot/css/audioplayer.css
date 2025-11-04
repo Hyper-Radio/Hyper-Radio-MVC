@@ -1,34 +1,85 @@
+/* ===== Audio Player Container ===== */
 #audio-player {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background-color: #000;
+    color: #fff;
+    border-top: 1px solid #333;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    flex-wrap: wrap;
     gap: 1rem;
-    background: transparent;
-    color: white;
-    padding-bottom: 1rem; 
-    padding-top: 1rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
-    border-top: 1px solid #444;
+    box-sizing: border-box;
 }
 
+/* ===== Player Sections ===== */
+.player-section {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+}
+
+/* ===== Now Playing ===== */
+.now-playing {
+    flex: 1 1 auto;
+    min-width: 150px;
+}
+.now-playing .label {
+    font-size: 0.85rem;
+    color: #aaa;
+}
+
+/* ===== Player Controls ===== */
+.player-controls {
+    flex: 0 0 auto;
+    display: flex;
+    gap: 0.5rem;
+}
 .control-btn {
     background: transparent;
-    color: white;
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
     cursor: pointer;
+    padding: 0.3rem;
 }
-
 .control-btn:hover {
-    background: #666;
+    opacity: 0.8;
 }
-
+.icon {
+    width: 32px;
+    height: 32px;
+    filter: invert(1);
+}
 .hidden {
     display: none;
 }
 
-.player-volume input {
-    width: 100px;
+/* ===== Volume ===== */
+.player-volume {
+    flex: 0 0 auto;
+}
+.player-volume input[type="range"] {
+    width: 120px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+    #audio-player {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 0.5rem;
+        padding: 0.5rem 1rem;
+    }
+    .player-volume input[type="range"] {
+        width: 100px;
+    }
+    .icon {
+        width: 28px;
+        height: 28px;
+    }
 }
