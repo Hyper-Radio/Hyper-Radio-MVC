@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "bYLA4OXvCkg3dX9eNRFYeVkbNrmRh4cqRXN0O4BirdY=",
+  "Hash": "djmaWv+niLamKWRe45+/keckpmXQ4NB+rZk3czXK1WU=",
   "Source": "HyperRadioMVC",
   "BasePath": "_content/HyperRadioMVC",
   "Mode": "Default",
@@ -55,6 +55,25 @@
       "OriginalItemSpec": "wwwroot/css/audioplayer.css"
     },
     {
+      "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/home.css",
+      "SourceId": "HyperRadioMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/",
+      "BasePath": "_content/HyperRadioMVC",
+      "RelativePath": "css/home.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/home.css"
+    },
+    {
       "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/layout.css",
       "SourceId": "HyperRadioMVC",
       "SourceType": "Discovered",
@@ -72,6 +91,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/css/layout.css"
+    },
+    {
+      "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/showdetails.css",
+      "SourceId": "HyperRadioMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/",
+      "BasePath": "_content/HyperRadioMVC",
+      "RelativePath": "css/showdetails.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/showdetails.css"
     },
     {
       "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/trackpitch.css",
@@ -414,6 +452,44 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot/logo.svg"
+    },
+    {
+      "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/pause.svg",
+      "SourceId": "HyperRadioMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/",
+      "BasePath": "_content/HyperRadioMVC",
+      "RelativePath": "pause.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/pause.svg"
+    },
+    {
+      "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/play.svg",
+      "SourceId": "HyperRadioMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/",
+      "BasePath": "_content/HyperRadioMVC",
+      "RelativePath": "play.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/play.svg"
     }
   ]
 }

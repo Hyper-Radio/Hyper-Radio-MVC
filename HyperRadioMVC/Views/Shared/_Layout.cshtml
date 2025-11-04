@@ -6,6 +6,7 @@
     <title>@ViewData["Title"] Hyper Radio</title>
     <link rel="icon" type="image/x-icon" href="~/favicon.svg" />
     <link rel="stylesheet" href="~/css/layout.css" />
+    <link rel="stylesheet" href="~/css/audioplayer.css" />
 
     <style>
         html, body {
@@ -96,7 +97,6 @@
 <div class="loading-overlay" id="loading">Loading...</div>
 
 <script src="~/lib/jquery/dist/jquery.min.js"></script>
-<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
 
 <script>
     // 🔥 AJAX Page Loader
@@ -134,9 +134,9 @@
         window.addEventListener("popstate", () => loadPage(window.location.pathname, false));
     });
 </script>
-
-<script src="~/js/player.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 <script src="~/js/site.js" asp-append-version="true"></script>
+
 @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

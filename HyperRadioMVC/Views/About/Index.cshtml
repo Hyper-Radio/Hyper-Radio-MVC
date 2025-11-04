@@ -1,4 +1,4 @@
-@model ShowDetailsVM
+@model HomeVM
 
 @{
     ViewBag.Title = "title";
@@ -7,5 +7,5 @@
 
 <div class="container">
     <h2>About Page</h2>
-    @await Html.PartialAsync("_ShowDetails", Model);
+    @await Html.PartialAsync("_ShowDetails", Model.ShowDetails);
 </div>

@@ -9,8 +9,16 @@
       "PackagePath": "staticwebassets/css/audioplayer.css"
     },
     {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/home.css",
+      "PackagePath": "staticwebassets/css/home.css"
+    },
+    {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/layout.css",
       "PackagePath": "staticwebassets/css/layout.css"
+    },
+    {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/showdetails.css",
+      "PackagePath": "staticwebassets/css/showdetails.css"
     },
     {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/trackpitch.css",
@@ -83,6 +91,14 @@
     {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/logo.svg",
       "PackagePath": "staticwebassets/logo.svg"
+    },
+    {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/pause.svg",
+      "PackagePath": "staticwebassets/pause.svg"
+    },
+    {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/play.svg",
+      "PackagePath": "staticwebassets/play.svg"
     },
     {
       "Id": "obj/Debug/net8.0/staticwebassets/msbuild.HyperRadioMVC.Microsoft.AspNetCore.StaticWebAssets.props",
