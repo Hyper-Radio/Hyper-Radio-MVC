@@ -1,13 +1,11 @@
 
 .container{
     display:block;
-    background-color: blue;
     overflow: hidden;
 }
 
 
 .about-text{
-    background-color: green;
     display: flex;
     align-content: center;
     justify-content: center;

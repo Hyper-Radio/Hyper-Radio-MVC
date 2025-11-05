@@ -6,7 +6,7 @@
     <audio id="audio" preload="none"></audio>
 
     <div class="player-section now-playing">
-        <span class="label">Now Playing:</span>
+        <span class="label">Now Playing</span>
         <div>
             <strong id="song-name">Sample Song</strong>
             <p id="artist-name">Artist Name</p>
@@ -51,7 +51,7 @@
             });
 
             hls.on(Hls.Events.ERROR, (event, data) => {
-                console.error("❌ HLS error:", data);
+                console.error(" HLS error:", data);
             });
         } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
             audio.src = streamUrl;

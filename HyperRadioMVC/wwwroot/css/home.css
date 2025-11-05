@@ -21,21 +21,22 @@
     margin-left: 50%; 
     width: 50%;
     height: 100vh;
-    padding: 2rem;
+    margin-bottom: 140px;
     overflow-y: auto;
+    
 }
 
 /* Scrollbar styling */
 .right-panel::-webkit-scrollbar,
 .left-panel::-webkit-scrollbar {
-    width: 8px;
+    width: 12px;
 }
 .right-panel::-webkit-scrollbar-thumb,
 .left-panel::-webkit-scrollbar-thumb {
-    background: blue;
+    background: white;
     border-radius: 4px;
 }
 .right-panel::-webkit-scrollbar-thumb:hover,
 .left-panel::-webkit-scrollbar-thumb:hover {
-    background: darkblue;
+    background: antiquewhite;
 }

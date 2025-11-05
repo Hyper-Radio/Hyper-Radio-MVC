@@ -35,7 +35,7 @@ html, body {
     padding: 0;
     height: 100%;
     overflow-x:  hidden;
-    overflow-y:  visible;
+    overflow-y:  hidden;
 }
 
 body {
@@ -59,13 +59,7 @@ header.masthead {
     width: auto;
 }
 
-.footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 100px;
-    background-color: green;
-}
+
 
 #main-content {
     flex: 1;
