@@ -41,7 +41,7 @@ html, body {
 body {
     display: flex;
     flex-direction: column;
-    background-color: #96ff0b;
+    background-color: #540ce4;
     color: white;
     overflow:  visible;
 }
@@ -63,7 +63,7 @@ header.masthead {
     position: fixed;
     bottom: 0;
     width: 100%;
-    height: 80px;
+    height: 100px;
     background-color: green;
 }
 
