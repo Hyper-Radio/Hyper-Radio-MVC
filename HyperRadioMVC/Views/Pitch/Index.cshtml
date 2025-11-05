@@ -39,25 +39,28 @@ ViewData["Title"] = "Pitch";
                 <span asp-validation-for="Genre" class="text-danger"></span>
             </div>
 
-            <div class="form-field">
-                <label asp-for="ReleaseYear" class="form-label">Release Year</label>
-                <input type="number" asp-for="ReleaseYear" class="form-control" min="1900" max="@DateTime.Now.Year" required />
-            </div>
-
+       
             <div class="form-nav">
                 <button type="button" class="form-btn next-btn">Next →</button>
             </div>
         </div>
 
         <div class="form-step">
+
+            <div class="form-field">
+                <label asp-for="ReleaseYear" class="form-label">Release Year</label>
+                <input type="number" asp-for="ReleaseYear" class="form-control" min="1900" max="@DateTime.Now.Year" required />
+            </div>
+
+            
             <div class="form-field">
                 <label asp-for="File" class="form-label">Track Upload</label>
-                <input type="file" asp-for="File" class="form-control" accept="audio/*" required />
+                <input type="file" asp-for="File" class="form-control" accept="audio/*" required/>
             </div>
 
             <div class="form-field">
                 <label asp-for="ImageURL" class="form-label">Image URL</label>
-                <input type="text" asp-for="ImageURL" class="form-control" />
+                <input type="text" asp-for="ImageURL" class="form-control"/>
             </div>
 
             <div class="form-nav">
