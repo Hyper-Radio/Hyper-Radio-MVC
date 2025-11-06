@@ -35,7 +35,7 @@ html, body {
     padding: 0;
     height: 100%;
     overflow-x:  hidden;
-    overflow-y:  hidden;
+    overflow-y:  visible;
 }
 
 body {
@@ -68,7 +68,6 @@ header.masthead {
 
 #main-content {
     flex: 1;
-    margin-top: 220px;
     margin-bottom: 80px;
     min-height: calc(100vh - 150px);
 }

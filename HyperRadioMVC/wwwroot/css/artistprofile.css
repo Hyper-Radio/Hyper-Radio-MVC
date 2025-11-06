@@ -1,17 +1,28 @@
+/* ------------------------------
+   Artist Profile (Right Panel)
+--------------------------------*/
+
 .artist-profile-container {
-    flex: 1 1 auto;  
+    position: relative;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     background-color: black;
-    gap: 20px;
-    padding: 20px;
+    color: white;
     box-sizing: border-box;
+    padding: 4rem 2rem;
+    gap: 2rem;
+
+    /* Scroll space for navbar (top) and audio player (bottom) */
+    min-height: calc(100vh - 160px);
+    margin-top: 30px;
+    margin-bottom: 80px;
 }
 
+/* Artist image section */
 .artist-image {
-    position: relative;
-    flex: 1 1 400px;
+    width: 100%;
     max-width: 600px;
     text-align: center;
 }
@@ -19,46 +30,82 @@
 .artist-image img {
     width: 100%;
     height: auto;
-    opacity: 0.85;
     border-radius: 10px;
+    opacity: 0.9;
 }
 
+/* Artist name under the image */
 .artist-name {
-    position: relative;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.5);
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 7.5rem;
-    font-weight: bold;
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.artist-name h2 {
+    font-size: 3rem;
+    font-weight: 700;
     color: white;
+    background: rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
 }
 
+/* Artist description */
 .artist-description {
-    flex: 1 1 200px;
-    max-width: 400px;
-    background-color: rgba(0, 0, 0, 0.6);
-    padding: 20px;
+    max-width: 600px;
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
     border-radius: 10px;
-    font-size: 1.1rem;
     line-height: 1.6;
+    color: #ddd;
+    font-size: 1.1rem;
 }
 
+/* ------------------------------
+   Side Tabs (from _SideNav)
+--------------------------------*/
+
+.side-tabs {
+    position: absolute;      /* pinned inside artist-profile-container */
+    top: 10%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    z-index: 10;
+}
+
+/* each tab */
+.side-tabs .tab {
+    display: block;
+    background: mediumvioletred;
+    color: #fff;
+    text-decoration: none;
+    padding: 1rem 1.5rem;
+    border-radius: 0.5rem;
+    font-weight: 1000;
+    letter-spacing: 1px;
+}
+
+.side-tabs .tab:hover {
+    background-color: dimgray;
+}
+
+/* ------------------------------
+   Responsive Tweaks
+--------------------------------*/
 @media (max-width: 900px) {
-    .artist-profile-container {
-        flex-direction: column;
-        height: auto; /* allow wrapping */
-    }
-
-    .artist-description, .artist-image {
-        max-width: 90%;
-    }
-
-    .artist-name {
+    .artist-name h2 {
         font-size: 2rem;
-        bottom: 10px;
-        padding: 5px 10px;
+    }
+
+    .artist-description {
+        max-width: 90%;
+        font-size: 1rem;
+    }
+
+    .side-tabs {
+        left: -10px;
+        gap: 2rem;
     }
 }
