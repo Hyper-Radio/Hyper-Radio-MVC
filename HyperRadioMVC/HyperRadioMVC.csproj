@@ -62,8 +62,4 @@
       <AdditionalFiles Include="Views\Show\Index.cshtml" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Content Remove="wwwroot\css\player.css" />
-    </ItemGroup>
-
 </Project>

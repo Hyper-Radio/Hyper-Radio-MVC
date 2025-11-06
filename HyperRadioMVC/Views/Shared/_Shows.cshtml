@@ -1,0 +1,21 @@
+@model IEnumerable<HyperRadioMVC.Models.ShowDetails>
+
+<table class="table table-striped table-bordered">
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Click to Play</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var show in Model)
+    {
+    <tr>
+        <td>@show.Name</td>
+        <td>@show.Description</td>
+        <td><a href="@show.URL" target="_blank" class="btn btn-primary btn-sm">Play</a></td>
+    </tr>
+    }
+    </tbody>
+</table>

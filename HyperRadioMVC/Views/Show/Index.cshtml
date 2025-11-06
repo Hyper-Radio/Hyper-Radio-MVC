@@ -1,3 +1,6 @@
+<link rel="stylesheet" href="css/show.css" asp-append-version="true">
+
+
 @model dynamic
 
 @{
@@ -5,7 +8,12 @@
     Layout = "_Layout";
 }
 
-<h2>SHOW</h2>
+<div class="show-container">
+<a asp-controller="Show" asp-action="Create" class="ajax-link">Create A Show</a>    
 
+<div class="show-table">
+    @Html.Partial("_Shows")
+</div>
 
-<a asp-controller="Show" asp-action="Create" class="ajax-link">Create A Show</a>
+</div>
+

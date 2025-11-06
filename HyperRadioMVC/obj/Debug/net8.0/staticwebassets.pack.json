@@ -9,10 +9,6 @@
       "PackagePath": "staticwebassets/css/artistprofile.css"
     },
     {
-      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/audioplayer.css",
-      "PackagePath": "staticwebassets/css/audioplayer.css"
-    },
-    {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/home.css",
       "PackagePath": "staticwebassets/css/home.css"
     },
@@ -21,12 +17,20 @@
       "PackagePath": "staticwebassets/css/layout.css"
     },
     {
-      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/showdetails.css",
-      "PackagePath": "staticwebassets/css/showdetails.css"
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/pitch.css",
+      "PackagePath": "staticwebassets/css/pitch.css"
     },
     {
-      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/trackpitch.css",
-      "PackagePath": "staticwebassets/css/trackpitch.css"
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/player.css",
+      "PackagePath": "staticwebassets/css/player.css"
+    },
+    {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/show.css",
+      "PackagePath": "staticwebassets/css/show.css"
+    },
+    {
+      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/showdetails.css",
+      "PackagePath": "staticwebassets/css/showdetails.css"
     },
     {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/favicon.svg",
