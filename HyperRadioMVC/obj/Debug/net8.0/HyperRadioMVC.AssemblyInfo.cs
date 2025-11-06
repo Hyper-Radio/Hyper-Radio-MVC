@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("HyperRadioMVC")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+4a3dd04deadf42598407e8eb4cb062cc522a3a89")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c0c53b2686509470c434e940ec7414b1ebf965c5")]
 [assembly: System.Reflection.AssemblyProductAttribute("HyperRadioMVC")]
 [assembly: System.Reflection.AssemblyTitleAttribute("HyperRadioMVC")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
