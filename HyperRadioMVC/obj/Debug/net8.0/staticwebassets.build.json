@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "djmaWv+niLamKWRe45+/keckpmXQ4NB+rZk3czXK1WU=",
+  "Hash": "Yj2KIDulNppgMT1H6r/mHG7ynUPlEZkoovofR1S8DNo=",
   "Source": "HyperRadioMVC",
   "BasePath": "_content/HyperRadioMVC",
   "Mode": "Default",
@@ -16,6 +16,25 @@
     }
   ],
   "Assets": [
+    {
+      "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/about.css",
+      "SourceId": "HyperRadioMVC",
+      "SourceType": "Discovered",
+      "ContentRoot": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/",
+      "BasePath": "_content/HyperRadioMVC",
+      "RelativePath": "css/about.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot/css/about.css"
+    },
     {
       "Identity": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/artistprofile.css",
       "SourceId": "HyperRadioMVC",

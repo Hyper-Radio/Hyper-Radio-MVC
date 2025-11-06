@@ -1,7 +1,7 @@
 .split-view {
     display: flex;
-    height: 100vh; /* full height */
-    background-color: #000;
+    height: 100vh;
+    background-color: purple;
     color: #fff;
     overflow: hidden;
 }
@@ -12,18 +12,17 @@
     left: 0;
     width: 50%;
     height: 100vh;
-    background-color: black ;
+    background-color: purple;
     padding: 1.5rem;
     overflow-y: hidden;
 }
 
 .right-panel {
-    margin-left: 50%; /* start where the left panel ends */
+    margin-left: 50%; 
     width: 50%;
     height: 100vh;
     padding: 2rem;
     overflow-y: auto;
-    background-color: #000;
 }
 
 /* Scrollbar styling */
@@ -33,10 +32,10 @@
 }
 .right-panel::-webkit-scrollbar-thumb,
 .left-panel::-webkit-scrollbar-thumb {
-    background: #555;
+    background: blue;
     border-radius: 4px;
 }
 .right-panel::-webkit-scrollbar-thumb:hover,
 .left-panel::-webkit-scrollbar-thumb:hover {
-    background: #777;
+    background: darkblue;
 }

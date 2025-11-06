@@ -27,9 +27,9 @@ public class HomeController : Controller
             },
             ShowDetails = new ShowDetailsVM
             {
-                Name = "Hyper Radio Live",
-                Description = "Weekly electronic music broadcast.",
-                ScheduledStart = DateTime.Now.AddHours(1)
+                Name = "Indie Music Show",
+                Description = "Weekly electronic music broadcast. This is a description of a show that includes information relevant to the show to be displayed hopefully taking up some space so that it is interesting.",
+                ScheduledStart = DateTime.UtcNow
             }
         };
 
