@@ -61,85 +61,75 @@
 
 
 
-
 <script>
 document.addEventListener("DOMContentLoaded", async () => {
-    // ===== Multi-step Form Logic =====
     const steps = document.querySelectorAll(".form-step");
     const nextBtns = document.querySelectorAll(".next-btn");
     const backBtns = document.querySelectorAll(".back-btn");
-    let currentStep = 0;
-
-    function showStep(index) {
-        steps.forEach((step, i) => {
-            step.classList.toggle("active", i === index);
-        });
-    }
-
-    nextBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            currentStep = Math.min(currentStep + 1, steps.length - 1);
-            showStep(currentStep);
-        });
-    });
-
-    backBtns.forEach((btn) => {
-        btn.addEventListener("click", () => {
-            currentStep = Math.max(currentStep - 1, 0);
-            showStep(currentStep);
-        });
-    });
-
-    // ===== Dynamic Track Dropdowns =====
     const container = document.getElementById("track-select-container");
     const addBtn = document.getElementById("add-track-btn");
-    const apiUrl = "http://localhost:5054/api/Tracks"; // Adjust to your API
+    const apiUrl = "http://localhost:5054/api/Tracks"; 
 
     let tracks = [];
 
-    // Fetch all tracks from API
+    // ===== Step Navigation =====
+    let currentStep = 0;
+    function showStep(index) {
+        steps.forEach((step, i) => step.classList.toggle("active", i === index));
+    }
+
+    nextBtns.forEach(btn => btn.addEventListener("click", () => {
+        currentStep = Math.min(currentStep + 1, steps.length - 1);
+        showStep(currentStep);
+    }));
+
+    backBtns.forEach(btn => btn.addEventListener("click", () => {
+        currentStep = Math.max(currentStep - 1, 0);
+        showStep(currentStep);
+    }));
+
+    // ===== Fetch Tracks =====
     async function fetchTracks() {
         try {
             const res = await fetch(apiUrl);
-            if (!res.ok) throw new Error("Failed to load tracks");
+            if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
             tracks = await res.json();
+            console.log("✅ Loaded tracks:", tracks);
         } catch (err) {
             console.error("❌ Error fetching tracks:", err);
-            alert("Could not load track list from server.");
+            alert("Could not load tracks from the server.");
         }
     }
 
-    // Populate a <select> element with track options
+    // ===== Populate a Dropdown =====
     function populateDropdown(select) {
         select.innerHTML = '<option value="">Select a track</option>';
         tracks.forEach(track => {
             const opt = document.createElement("option");
             opt.value = track.id;
-            opt.textContent = track.title || track.name || `Track ${track.id}`;
+            opt.textContent = `${track.title} (${track.genre || "Unknown"})`;
             select.appendChild(opt);
         });
     }
 
-    // Add a new dropdown row
+    // ===== Add Track Dropdown =====
     function addTrackDropdown() {
         const wrapper = document.createElement("div");
-        wrapper.className = "track-select";
+        wrapper.className = "track-select flex items-center space-x-2";
+
         const select = document.createElement("select");
         select.name = "TrackIds";
         select.className = "form-select track-dropdown";
         select.required = true;
-
         populateDropdown(select);
-        wrapper.appendChild(select);
 
-        // Optional remove button
         const removeBtn = document.createElement("button");
         removeBtn.type = "button";
-        removeBtn.textContent = "️ Remove";
+        removeBtn.textContent = "Remove";
         removeBtn.className = "form-btn back-btn";
-        removeBtn.style.marginLeft = "0.5rem";
         removeBtn.addEventListener("click", () => wrapper.remove());
 
+        wrapper.appendChild(select);
         wrapper.appendChild(removeBtn);
         container.appendChild(wrapper);
     }
@@ -147,11 +137,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     // ===== Initialize =====
     await fetchTracks();
 
-    // Populate first existing dropdown if present
     const firstDropdown = document.querySelector(".track-dropdown");
     if (firstDropdown) populateDropdown(firstDropdown);
 
-    // Add new dropdowns on click
     addBtn.addEventListener("click", addTrackDropdown);
 });
 </script>
