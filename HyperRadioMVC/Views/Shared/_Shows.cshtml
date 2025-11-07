@@ -1,35 +1,30 @@
 @model IEnumerable<HyperRadioMVC.Models.ShowDetails>
 
-<!-- Include the same stylesheet used by the right-panel -->
 <link rel="stylesheet" href="~/css/artistprofile.css" asp-append-version="true" />
 
-<div class="artist-profile-container">
-    <!-- Side navigation -->
-    @Html.Partial("_SideNav")
+<div class="show-container">
+
+    <div>
+        @Html.Partial("_SideNav")
+    </div>
 
     <div class="artist-shows">
-        <h2 class="artist-name">Shows</h2>
+        <h2 class="show-headline">Shows</h2>
 
-        <table class="table table-striped table-bordered" style="width: 90%; margin: 2rem auto; color: white; background-color: rgba(0,0,0,0.6);">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Description</th>
-                <th>Click to Play</th>
-            </tr>
-            </thead>
-            <tbody>
+        <div class="shows-list">
             @foreach (var show in Model)
             {
-                <tr>
-                    <td>@show.Name</td>
-                    <td>@show.Description</td>
-                    <td>
-                        <a href="@show.URL" target="_blank" class="btn btn-primary btn-sm">Play</a>
-                    </td>
-                </tr>
+                <a href="@show.URL" target="_blank" class="show-card-horizontal">
+                    <div class="show-image" style="background-image: url('@show.ImageUrl');">
+                        <div class="overlay"></div>
+                    </div>
+
+                    <div class="show-info">
+                        <h3 class="show-title">@show.Name</h3>
+                        <p class="show-description">@show.Description</p>
+                    </div>
+                </a>
             }
-            </tbody>
-        </table>
+        </div>
     </div>
 </div>
