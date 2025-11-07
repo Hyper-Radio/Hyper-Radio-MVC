@@ -25,10 +25,6 @@
       "PackagePath": "staticwebassets/css/player.css"
     },
     {
-      "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/show.css",
-      "PackagePath": "staticwebassets/css/show.css"
-    },
-    {
       "Id": "/Users/joshuang/Desktop/Programming/Hyper Radio/Hyper-Radio-MVC/HyperRadioMVC/wwwroot/css/showdetails.css",
       "PackagePath": "staticwebassets/css/showdetails.css"
     },

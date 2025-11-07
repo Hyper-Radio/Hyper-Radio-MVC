@@ -109,3 +109,9 @@
         gap: 2rem;
     }
 }
+
+.artist-shows {
+    max-height: 80vh;
+    overflow-y: auto;
+    padding-right: 1rem;
+}

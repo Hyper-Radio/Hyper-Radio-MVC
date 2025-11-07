@@ -20,9 +20,7 @@ public class PitchController : Controller
         return View();
     }
     
-    
-    //Succesfully 
-    
+
     
     
 }
