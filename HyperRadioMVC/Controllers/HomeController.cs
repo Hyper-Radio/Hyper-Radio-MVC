@@ -56,13 +56,16 @@ namespace HyperRadioMVC.Controllers
                 {
                     Name = "Future Beats",
                     Description = "Exploring forward-thinking beats and producers.",
-                    ScheduledStart = DateTime.UtcNow.AddDays(1)
+                    ScheduledStart = DateTime.UtcNow.AddDays(1),
+                    ImageUrl = "https://picsum.photos/id/26/200",
                 },
                 new ShowDetails
                 {
                     Name = "Lo-Fi Lounge",
                     Description = "Chill instrumental hip-hop and ambient selections.",
-                    ScheduledStart = DateTime.UtcNow.AddDays(2)
+                    ScheduledStart = DateTime.UtcNow.AddDays(2),
+                    ImageUrl = "https://picsum.photos/id/28/200"
+
                 }
             };
 
