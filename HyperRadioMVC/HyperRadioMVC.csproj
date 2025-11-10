@@ -58,4 +58,8 @@
       <_ContentIncludedByDefault Remove="wwwroot\lib\bootstrap\LICENSE" />
     </ItemGroup>
 
+    <ItemGroup>
+      <AdditionalFiles Include="Views\Show\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

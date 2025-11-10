@@ -1,9 +1,17 @@
-@model HyperRadioMVC.Models.ArtistProfile
+@model HyperRadioMVC.ViewModels.ArtistProfileVM
+
+
 <link rel="stylesheet" href="~/css/artistprofile.css" asp-append-version="true" />
 
 <div class="artist-profile-container">
+
+    
+    <div>
+        @Html.Partial("_SideNav")
+    </div>
+    
     <div class="artist-image">
-        <img src="@Model.ImageUrl" alt="@Model.Name" />
+        <img src="@Model.ImageUrl" alt="@Model.Name"/>
         <div class="artist-name">
             <h2>@Model.Name</h2>
         </div>

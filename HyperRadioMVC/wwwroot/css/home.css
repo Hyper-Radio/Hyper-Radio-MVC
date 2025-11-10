@@ -1,0 +1,40 @@
+.split-view {
+    display: flex;
+    height: 100vh;
+    background-color: purple;
+    color: #fff;
+    overflow: hidden;
+}
+
+.left-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    background-color: purple;
+    padding: 1.5rem;
+    overflow-y: hidden;
+}
+
+.right-panel {
+    margin-left: 50%;
+    width: 50%;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Scrollbar styling */
+.right-panel::-webkit-scrollbar,
+.left-panel::-webkit-scrollbar {
+    width: 8px;
+}
+.right-panel::-webkit-scrollbar-thumb,
+.left-panel::-webkit-scrollbar-thumb {
+    background: blue;
+    border-radius: 4px;
+}
+.right-panel::-webkit-scrollbar-thumb:hover,
+.left-panel::-webkit-scrollbar-thumb:hover {
+    background: darkblue;
+}
