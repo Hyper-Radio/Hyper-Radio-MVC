@@ -12,11 +12,6 @@ public class ShowController : Controller
     }
     
 
-    public IActionResult ShowList()
-    {
-        return View();
-
-    }
 
 
     

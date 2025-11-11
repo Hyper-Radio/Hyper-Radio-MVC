@@ -7,10 +7,14 @@ namespace HyperRadioMVC.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IHttpClientFactory _httpClientFactory;
 
-        public HomeController(ILogger<HomeController> logger)
+
+        public HomeController(ILogger<HomeController> logger, IHttpClientFactory httpClientFactory)
         {
             _logger = logger;
+            _httpClientFactory = httpClientFactory;
+
         }
 
         // Full page render
@@ -35,43 +39,72 @@ namespace HyperRadioMVC.Controllers
 
         // === Partial for LEFT PANEL (Show Details) ===
         [HttpGet]
-        public IActionResult ShowDetails()
+        public async Task<IActionResult> ShowDetails()
         {
-            var show = new ShowDetailsVM
+            var client = _httpClientFactory.CreateClient();
+
+            try
             {
-                Name = "Indie Music Show",
-                Description = "Weekly electronic music broadcast featuring indie and electronic artists from around the world.",
-                ScheduledStart = DateTime.UtcNow
-            };
-            return PartialView("_ShowDetails", show);
+                // Fetch data from the API
+                var show = await client.GetFromJsonAsync<ShowDetailsVM>("http://localhost:5118/api/stream/live/info");
+
+                // If API returns null, fallback to default
+                if (show == null)
+                {
+                    show = new ShowDetailsVM
+                    {
+                        Name = "Indie Music Show",
+                        Description = "Weekly electronic music broadcast featuring indie and electronic artists from around the world.",
+                        ScheduledStart = DateTime.UtcNow
+                    };
+                }
+
+                return PartialView("_ShowDetails", show);
+            }
+            catch (Exception ex)
+            {
+                // Log error and fallback
+                Console.WriteLine($"Error fetching show info: {ex.Message}");
+
+                var fallbackShow = new ShowDetailsVM
+                {
+                    Name = "Indie Music Show",
+                    Description = "Weekly electronic music broadcast featuring indie and electronic artists from around the world.",
+                    ScheduledStart = DateTime.UtcNow
+                };
+
+                return PartialView("_ShowDetails", fallbackShow);
+            }
         }
 
         // === Partial for RIGHT PANEL alternative (Shows List) ===
+        
         [HttpGet]
-        public IActionResult Shows()
+        public async Task<IActionResult> Shows()
         {
-            var shows = new List<ShowDetails>
+            var client = _httpClientFactory.CreateClient();
+
+            try
             {
-                new ShowDetails
-                {
-                    Name = "Future Beats",
-                    Description = "Exploring forward-thinking beats and producers.",
-                    ScheduledStart = DateTime.UtcNow.AddDays(1),
-                    ImageUrl = "https://picsum.photos/id/26/200",
-                },
-                new ShowDetails
-                {
-                    Name = "Lo-Fi Lounge",
-                    Description = "Chill instrumental hip-hop and ambient selections.",
-                    ScheduledStart = DateTime.UtcNow.AddDays(2),
-                    ImageUrl = "https://picsum.photos/id/28/200"
+                // Call your API endpoint
+                var shows = await client.GetFromJsonAsync<List<ShowDetails>>("http://localhost:5054/api/shows");
 
+                if (shows == null)
+                {
+                    shows = new List<ShowDetails>();
                 }
-            };
 
-            return PartialView("_Shows", shows);
+                return PartialView("_Shows", shows);
+            }
+            catch (Exception ex)
+            {
+                // Handle errors gracefully
+                Console.WriteLine(ex.Message);
+                return PartialView("_Shows", new List<ShowDetails>());
+            }
         }
-
+        
+        
         // === Helper ===
         private HomeVM BuildHomeViewModel()
         {

@@ -6,6 +6,7 @@
     overflow: hidden;
 }
 
+/* Desktop layout (side by side) */
 .left-panel {
     position: fixed;
     top: 0;
@@ -37,4 +38,26 @@
 .right-panel::-webkit-scrollbar-thumb:hover,
 .left-panel::-webkit-scrollbar-thumb:hover {
     background: darkblue;
+}
+
+/* ---------- Responsive layout for mobile ---------- */
+@media (max-width: 768px) {
+    .split-view {
+        flex-direction: column; /* stack vertically, right panel first */
+        height: auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 1rem;
+        overflow-y: visible;
+    }
+
+    .right-panel {
+        order: -1; /* ensures right panel appears above left */
+    }
 }

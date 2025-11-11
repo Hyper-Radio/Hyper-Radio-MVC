@@ -15,8 +15,15 @@
         <a asp-controller="Home" asp-action="Index" class="ajax-link">
             <img src="/logo.svg" alt="Hyper Radio" class="logo" />
         </a>
-        <div>
-            <a asp-controller="About" asp-action="Index" class= "ajax-link">ABOUT</a>
+
+        <!-- Hamburger Button -->
+        <button class="menu-toggle" id="menu-toggle" aria-label="Toggle menu">
+            ☰
+        </button>
+
+        <!-- Navigation Links -->
+        <div class="nav-links" id="nav-links">
+            <a asp-controller="About" asp-action="Index" class="ajax-link">ABOUT</a>
             <a asp-controller="Show" asp-action="Index" class="ajax-link">CREATE A SHOW</a>
             <a asp-controller="Pitch" asp-action="Index" class="ajax-link">PITCH</a>
         </div>
@@ -81,5 +88,17 @@
 @await RenderSectionAsync("Scripts", required: false)
 
 <script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+<script>
+    // Hamburger menu toggle
+    document.addEventListener("DOMContentLoaded", function () {
+        const toggle = document.getElementById("menu-toggle");
+        const navLinks = document.getElementById("nav-links");
+
+        toggle.addEventListener("click", () => {
+            navLinks.classList.toggle("show");
+        });
+    });
+</script>
 </body>
 </html>
