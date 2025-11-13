@@ -1,0 +1,100 @@
+
+<link rel="stylesheet" href="css/player.css" asp-append-version="true"/>
+
+<footer id="audio-player">
+    <!-- Hidden audio element -->
+    <audio id="audio" preload="none"></audio>
+
+    <div class="player-section now-playing">
+        <span class="label">Now Playing:</span>
+        <div>
+            <strong id="song-name">Sample Song</strong>
+            <p id="artist-name">Artist Name</p>
+        </div>
+    </div>
+
+    <div class="player-section player-controls">
+        <button id="play-btn" class="control-btn">
+            <img src="/play.svg" alt="Play" class="icon"/>
+        </button>
+        <button id="pause-btn" class="control-btn hidden">
+            <img src="/pause.svg" alt="Pause" class="icon"/>
+        </button>
+    </div>
+
+    <div class="player-section player-volume">
+        <input id="volume" type="range" min="0" max="1" step="0.05" value="1"/>
+    </div>
+</footer>
+
+<!-- HLS.js -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        const audio = document.getElementById("audio");
+        const playBtn = document.getElementById("play-btn");
+        const pauseBtn = document.getElementById("pause-btn");
+        const volumeSlider = document.getElementById("volume");
+        const streamUrl = "http://localhost:5118/api/stream/live.m3u8";  //Update this to azure
+
+        let hls;
+
+        // Initialize HLS
+        if (Hls.isSupported()) {
+            hls = new Hls();
+            hls.loadSource(streamUrl);
+            hls.attachMedia(audio);
+
+            hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                console.log("✅ HLS manifest parsed, ready to play.");
+            });
+
+            hls.on(Hls.Events.ERROR, (event, data) => {
+                console.error("❌ HLS error:", data);
+            });
+        } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+            audio.src = streamUrl;
+        }
+
+        // Play button
+        playBtn.addEventListener("click", async () => {
+            if (hls) hls.startLoad(); // resume live stream
+            await audio.play().catch(err => console.warn("Playback blocked:", err));
+            playBtn.classList.add("hidden");
+            pauseBtn.classList.remove("hidden");
+        });
+
+        // Pause button
+        pauseBtn.addEventListener("click", () => {
+            if (hls) hls.stopLoad();  // stop live fetching
+            audio.pause();
+            pauseBtn.classList.add("hidden");
+            playBtn.classList.remove("hidden");
+        });
+
+        // Sync buttons if user pauses/plays manually
+        audio.addEventListener("play", () => {
+            playBtn.classList.add("hidden");
+            pauseBtn.classList.remove("hidden");
+        });
+        audio.addEventListener("pause", () => {
+            pauseBtn.classList.add("hidden");
+            playBtn.classList.remove("hidden");
+        });
+
+        // Volume control
+        volumeSlider.addEventListener("input", e => {
+            audio.volume = e.target.value;
+        });
+
+        // Unlock playback on first user interaction (required for autoplay restrictions)
+        const unlock = () => {
+            audio.play().catch(() => {});
+            document.removeEventListener("click", unlock);
+            document.removeEventListener("keydown", unlock);
+        };
+        document.addEventListener("click", unlock);
+        document.addEventListener("keydown", unlock);
+    });
+</script>

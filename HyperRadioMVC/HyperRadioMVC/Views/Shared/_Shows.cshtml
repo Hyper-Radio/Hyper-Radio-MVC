@@ -1,0 +1,30 @@
+@model IEnumerable<HyperRadioMVC.Models.ShowDetails>
+
+<link rel="stylesheet" href="~/css/artistprofile.css" asp-append-version="true" />
+
+<div class="show-container">
+
+    <div>
+        @Html.Partial("_SideNav")
+    </div>
+
+    <div class="artist-shows">
+        <h2 class="show-headline">Shows</h2>
+
+        <div class="shows-list">
+            @foreach (var show in Model)
+            {
+                <a href="@show.URL" target="_blank" class="show-card-horizontal">
+                    <div class="show-image" style="background-image: url('@show.ImageUrl');">
+                        <div class="overlay"></div>
+                    </div>
+
+                    <div class="show-info">
+                        <h3 class="show-title">@show.Name</h3>
+                        <p class="show-description">@show.Description</p>
+                    </div>
+                </a>
+            }
+        </div>
+    </div>
+</div>
