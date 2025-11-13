@@ -31,6 +31,36 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script>
+    let hls;
+    const audio = document.getElementById("audio");
+
+    function playShow(showId, name, description, imageUrl) {
+        const streamUrl = `http://localhost:5118/api/stream/live.m3u8/${showId}`;
+
+        // Update displayed metadata
+        document.getElementById("song-name").innerText = name;
+        document.getElementById("artist-name").innerText = description;
+
+        // Reinitialize HLS
+        if (hls) {
+            hls.destroy();
+        }
+
+        if (Hls.isSupported()) {
+            hls = new Hls();
+            hls.loadSource(streamUrl);
+            hls.attachMedia(audio);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play());
+        } else {
+            audio.src = streamUrl;
+            audio.play();
+        }
+    }
+</script>
+
+<script>
+    
+    
     document.addEventListener("DOMContentLoaded", () => {
         const audio = document.getElementById("audio");
         const playBtn = document.getElementById("play-btn");

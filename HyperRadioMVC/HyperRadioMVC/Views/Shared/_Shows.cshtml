@@ -14,9 +14,17 @@
         <div class="shows-list">
             @foreach (var show in Model)
             {
-                <a href="@show.URL" target="_blank" class="show-card-horizontal">
+                <a href="#" 
+                   onclick="playShow(@show.Id, '@show.Name', '@show.Description', '@show.ImageUrl')" 
+                   class="show-card-horizontal">
+
                     <div class="show-image" style="background-image: url('@show.ImageUrl');">
                         <div class="overlay"></div>
+
+                        <!-- Play button overlay -->
+                        <div class="play-overlay">
+                            <img src="/play.svg" class="play-icon" alt="Play">
+                        </div>
                     </div>
 
                     <div class="show-info">
