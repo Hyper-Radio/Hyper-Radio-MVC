@@ -1,26 +1,27 @@
 @model HyperRadioMVC.ViewModels.ShowDetailsVM
+
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="~/css/showdetails.css" asp-append-version="true"/>
 </head>
 
-@{
-    ViewBag.Title = "About Show";
-    Layout = "_Layout";
 
-    // Format example: Tuesday 02 November | 18.00
-    var formattedDate = Model.ScheduledStart.ToString("dddd dd MMMM | HH.mm");
+
+@{
+ViewBag.Title = "About Show";
+Layout = "_Layout";
 }
 
-<div class="show-card">
-    <div class="show-card-header">
-        <span class="live-dot"></span>
-        Now Playing
-    </div>
+<div class="container">
+<div class="show-time">
+    <h5>@Model.ScheduledStart</h5>
+</div>
 
-    <div class="show-info">
-        <h5 class="show-time">@formattedDate</h5>
-        <h2 class="show-title">@Model.Name</h2>
-        <p class="show-description">@Model.Description</p>
-    </div>
+<div class="show-title">
+    <h2>@Model.Name</h2>
+</div>
+
+<div class="show-description">
+    <p>@Model.Description</p>
+</div>
 </div>
