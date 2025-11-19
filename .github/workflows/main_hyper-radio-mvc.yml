@@ -24,8 +24,8 @@ jobs:
           dotnet-version: '8.x'
 
       - name: Build with dotnet
-        run: dotnet build --configuration Release
-
+    run: dotnet build Hyper_Radio_API/Hyper_Radio_API.csproj --configuration Release
+    
       - name: dotnet publish
         run: dotnet publish -c Release -o "${{env.DOTNET_ROOT}}/myapp"
 
@@ -62,4 +62,5 @@ jobs:
           app-name: 'Hyper-Radio-MVC'
           slot-name: 'Production'
           package: .
+
           
