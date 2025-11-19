@@ -1,0 +1,101 @@
+<link rel="stylesheet" href="~/css/pitch.css" asp-append-version="true" />
+
+@model HyperRadioMVC.ViewModels.CreateTrackVM
+
+@{
+ViewData["Title"] = "Pitch";
+}
+
+<div class="form">
+    <h1 class="form-title">Submit a Track</h1>
+
+    <form id="multi-step-form" class="form-body" action="https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/Tracks/upload" method="post" enctype="multipart/form-data">
+
+        <div class="form-step active">
+            <div class="form-field">
+                <label asp-for="Title" class="form-label">Track Name</label>
+                <input type="text" asp-for="Title" class="form-control" required />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Description" class="form-label">Description</label>
+                <input type="text" asp-for="Description" class="form-control" required />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="Genre" class="form-label">Genre</label>
+                <select asp-for="Genre" class="form-select" required>
+                    <option value="">Select a genre</option>
+                    <option>Hip-Hop</option>
+                    <option>Electronic</option>
+                    <option>Pop</option>
+                    <option>Rock</option>
+                    <option>Jazz</option>
+                    <option>Experimental</option>
+                    <option>Other</option>
+                </select>
+                <span asp-validation-for="Genre" class="text-danger"></span>
+            </div>
+
+       
+            <div class="form-nav">
+                <button type="button" class="form-btn next-btn">Next →</button>
+            </div>
+        </div>
+
+        <div class="form-step">
+
+            <div class="form-field">
+                <label asp-for="ReleaseYear" class="form-label">Release Year</label>
+                <input type="number" asp-for="ReleaseYear" class="form-control" min="1900" max="@DateTime.Now.Year" required />
+            </div>
+
+            
+            <div class="form-field">
+                <label asp-for="File" class="form-label">Track Upload</label>
+                <input type="file" asp-for="File" class="form-control" accept="audio/*" required/>
+            </div>
+
+            <div class="form-field">
+                <label asp-for="ImageURL" class="form-label">Image URL</label>
+                <input type="text" asp-for="ImageURL" class="form-control"/>
+            </div>
+
+            <div class="form-nav">
+                <button type="button" class="form-btn back-btn">← Back</button>
+                <button type="submit" class="form-btn submit-btn">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const steps = document.querySelectorAll(".form-step");
+    const nextBtns = document.querySelectorAll(".next-btn");
+    const backBtns = document.querySelectorAll(".back-btn");
+    let currentStep = 0;
+
+    function showStep(index) {
+        steps.forEach((step, i) => {
+            step.classList.toggle("active", i === index);
+        });
+    }
+
+    nextBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            currentStep = Math.min(currentStep + 1, steps.length - 1);
+            showStep(currentStep);
+        });
+    });
+
+    backBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+            currentStep = Math.max(currentStep - 1, 0);
+            showStep(currentStep);
+        });
+    });
+});
+</script>

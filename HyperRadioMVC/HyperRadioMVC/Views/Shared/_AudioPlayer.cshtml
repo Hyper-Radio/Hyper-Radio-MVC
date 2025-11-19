@@ -56,19 +56,20 @@
             audio.play();
         }
     }
-</script>
-
-<script>
-    
     
     document.addEventListener("DOMContentLoaded", () => {
         const audio = document.getElementById("audio");
         const playBtn = document.getElementById("play-btn");
         const pauseBtn = document.getElementById("pause-btn");
         const volumeSlider = document.getElementById("volume");
-        const streamUrl = "http://localhost:5118/api/stream/live.m3u8";  //Update this to azure
+        //const streamUrl = "http://localhost:5118/api/stream/live.m3u8";  //Update this to azure
 
-        let hls;
+
+        const streamUrl =  "https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/Tracks/1"
+
+
+
+            let hls;
 
         // Initialize HLS
         if (Hls.isSupported()) {
@@ -83,6 +84,8 @@
             hls.on(Hls.Events.ERROR, (event, data) => {
                 console.error("❌ HLS error:", data);
             });
+            
+            
         } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
             audio.src = streamUrl;
         }
