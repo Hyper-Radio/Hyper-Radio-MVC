@@ -10,7 +10,6 @@ public class Program
         // Add services to the container.
         builder.Services.AddControllersWithViews();
         
-        
         //ADD Http client so that it can connect to api
         builder.Services.AddHttpClient("Hyper-Radio.API", client =>
         {

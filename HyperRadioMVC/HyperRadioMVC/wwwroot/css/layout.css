@@ -173,3 +173,41 @@ header.masthead {
         margin: 0;
     }
 }
+
+/* Mobile menu hidden by default */
+.nav-links {
+    display: flex;
+    gap: 20px;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        font-size: 2rem;
+        background: none;
+        border: none;
+        color: white;
+        cursor: pointer;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: black;
+        padding: 1rem 0;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        border-top: 1px solid #333;
+    }
+
+    .nav-links.show {
+        display: flex;
+    }
+}

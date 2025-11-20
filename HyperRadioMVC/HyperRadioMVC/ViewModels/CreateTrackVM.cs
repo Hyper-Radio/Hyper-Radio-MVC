@@ -1,15 +1,26 @@
-namespace HyperRadioMVC.ViewModels;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
-public class CreateTrackVM
+namespace HyperRadioMVC.ViewModels
 {
-    public string Title { get; set; }
-    public int ReleaseYear { get; set; }
-    public string Genre { get; set; }
-    public string Description { get; set; }
+    public class CreateTrackVM
+    {
+        [Required]
+        public string Title { get; set; } = string.Empty;
 
-    public int Duration { get; set; }
-    
-    public IFormFile File  { get; set; }
-    public string TrackURL { get; set; }
-    public string? ImageURL { get; set; }
+        [Required]
+        public string Description { get; set; } = string.Empty;
+
+        [Required]
+        public string Genre { get; set; } = string.Empty;
+
+        [Required]
+        [Range(1900, 2100)]
+        public int ReleaseYear { get; set; }
+
+        [Required]
+        public IFormFile File { get; set; } = default!;
+
+        public string? ImageURL { get; set; }
+    }
 }
