@@ -1,0 +1,104 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] Hyper Radio</title>
+
+    <link rel="icon" type="image/x-icon" href="~/favicon.svg" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+</head>
+
+<body>
+
+<header>
+    <div class="navbar">
+
+        <a asp-controller="Home" asp-action="Index" class="ajax-link">
+            <img src="/logo.svg" alt="Hyper Radio" class="logo" />
+        </a>
+
+        <!-- Hamburger -->
+        <button id="menu-toggle" class="menu-toggle">☰</button>
+
+        <!-- Navigation -->
+        <nav id="nav-links" class="nav-links">
+            <a asp-controller="About" asp-action="Index" class="ajax-link">ABOUT</a>
+            <a asp-controller="Show" asp-action="Index" class="ajax-link">CREATE A SHOW</a>
+            <a asp-controller="Pitch" asp-action="Index" class="ajax-link">PITCH</a>
+        </nav>
+
+    </div>
+</header>
+
+<main id="main-content">
+    @RenderBody()
+</main>
+
+<footer class="footer">
+    @Html.Partial("_AudioPlayer")
+</footer>
+
+<div id="loading" class="loading-overlay">Loading...</div>
+
+<!-- jQuery -->
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<!-- AJAX Page Loader -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+
+    const mainContent = document.getElementById("main-content");
+    const loading = document.getElementById("loading");
+
+    function loadPage(url, pushState = true) {
+        loading.style.display = "flex";
+
+        fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } })
+            .then(res => res.text())
+            .then(html => {
+                const doc = new DOMParser().parseFromString(html, "text/html");
+                mainContent.innerHTML = doc.querySelector("#main-content").innerHTML;
+
+                if (pushState) window.history.pushState({}, "", url);
+            })
+            .finally(() => loading.style.display = "none");
+    }
+
+    document.body.addEventListener("click", (e) => {
+        const link = e.target.closest("a.ajax-link");
+        if (!link) return;
+
+        e.preventDefault();
+        const url = link.getAttribute("href");
+        if (url) loadPage(url);
+    });
+
+    window.addEventListener("popstate", () => {
+        loadPage(window.location.pathname, false);
+    });
+});
+</script>
+
+<!-- Hamburger Menu -->
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("menu-toggle");
+    const navLinks = document.getElementById("nav-links");
+
+    toggle.addEventListener("click", () => {
+        navLinks.classList.toggle("show");
+    });
+});
+</script>
+
+<!-- HLS + Shared Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+@await RenderSectionAsync("Scripts", required: false)
+
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
+
+</body>
+</html>

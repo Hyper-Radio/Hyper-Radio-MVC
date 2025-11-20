@@ -1,0 +1,63 @@
+.split-view {
+    display: flex;
+    height: 100vh;
+    background-color: #ff3838;
+    color: #fff;
+    overflow: hidden;
+}
+
+/* Desktop layout (side by side) */
+.left-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    background-color: #ff3838;
+    padding: 1.5rem;
+    overflow-y: hidden;
+}
+
+.right-panel {
+    margin-left: 50%;
+    width: 50%;
+    height: 100vh;
+    overflow-y: auto;
+}
+
+/* Scrollbar styling */
+.right-panel::-webkit-scrollbar,
+.left-panel::-webkit-scrollbar {
+    width: 8px;
+}
+.right-panel::-webkit-scrollbar-thumb,
+.left-panel::-webkit-scrollbar-thumb {
+    background: #a8a8a8;
+    border-radius: 4px;
+}
+.right-panel::-webkit-scrollbar-thumb:hover,
+.left-panel::-webkit-scrollbar-thumb:hover {
+    background: #000000;
+}
+
+/* ---------- Responsive layout for mobile ---------- */
+@media (max-width: 768px) {
+    .split-view {
+        flex-direction: column; /* stack vertically, right panel first */
+        height: auto;
+    }
+
+    .left-panel,
+    .right-panel {
+        position: static;
+        width: 100%;
+        height: auto;
+        margin: 0;
+        padding: 1rem;
+        overflow-y: visible;
+    }
+
+    .right-panel {
+        order: -1; /* ensures right panel appears above left */
+    }
+}
