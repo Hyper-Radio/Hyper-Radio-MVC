@@ -1,4 +1,3 @@
-
 <link rel="stylesheet" href="css/player.css" asp-append-version="true"/>
 
 <footer id="audio-player">
@@ -31,79 +30,59 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script>
-    let hls;
-    const audio = document.getElementById("audio");
-
-    function playShow(showId, name, description, imageUrl) {
-        const streamUrl = `http://localhost:5118/api/stream/live.m3u8/${showId}`;
-
-        // Update displayed metadata
-        document.getElementById("song-name").innerText = name;
-        document.getElementById("artist-name").innerText = description;
-
-        // Reinitialize HLS
-        if (hls) {
-            hls.destroy();
-        }
-
-        if (Hls.isSupported()) {
-            hls = new Hls();
-            hls.loadSource(streamUrl);
-            hls.attachMedia(audio);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play());
-        } else {
-            audio.src = streamUrl;
-            audio.play();
-        }
-    }
-</script>
-
-<script>
-    
-    
     document.addEventListener("DOMContentLoaded", () => {
+        // Single HLS instance
+        let hls;
         const audio = document.getElementById("audio");
         const playBtn = document.getElementById("play-btn");
         const pauseBtn = document.getElementById("pause-btn");
         const volumeSlider = document.getElementById("volume");
-        const streamUrl = "http://localhost:5118/api/stream/live.m3u8";  //Update this to azure
 
-        let hls;
+        // Default stream
+        const defaultStreamUrl = "https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/stream/live.m3u8";
 
         // Initialize HLS
-        if (Hls.isSupported()) {
-            hls = new Hls();
-            hls.loadSource(streamUrl);
-            hls.attachMedia(audio);
+        const initHLS = (url) => {
+            if (hls) {
+                hls.destroy(); // Clean up previous HLS instance
+            }
 
-            hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                console.log("✅ HLS manifest parsed, ready to play.");
-            });
+            if (Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audio);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    console.log("✅ HLS manifest parsed, ready to play.");
+                    audio.play().catch(() => {}); // handle autoplay restrictions
+                });
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    console.error("❌ HLS error:", data);
+                });
+            } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+                audio.src = url;
+                audio.play().catch(() => {});
+            }
+        };
 
-            hls.on(Hls.Events.ERROR, (event, data) => {
-                console.error("❌ HLS error:", data);
-            });
-        } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
-            audio.src = streamUrl;
-        }
+        // Play default stream on load
+        initHLS(defaultStreamUrl);
 
-        // Play button
+        // Play/pause button handlers
         playBtn.addEventListener("click", async () => {
-            if (hls) hls.startLoad(); // resume live stream
+            if (hls) hls.startLoad();
             await audio.play().catch(err => console.warn("Playback blocked:", err));
             playBtn.classList.add("hidden");
             pauseBtn.classList.remove("hidden");
         });
 
-        // Pause button
         pauseBtn.addEventListener("click", () => {
-            if (hls) hls.stopLoad();  // stop live fetching
+            if (hls) hls.stopLoad();
             audio.pause();
             pauseBtn.classList.add("hidden");
             playBtn.classList.remove("hidden");
         });
 
-        // Sync buttons if user pauses/plays manually
+        // Sync button states with manual play/pause
         audio.addEventListener("play", () => {
             playBtn.classList.add("hidden");
             pauseBtn.classList.remove("hidden");
@@ -118,7 +97,7 @@
             audio.volume = e.target.value;
         });
 
-        // Unlock playback on first user interaction (required for autoplay restrictions)
+        // Unlock playback on first interaction (required by some browsers)
         const unlock = () => {
             audio.play().catch(() => {});
             document.removeEventListener("click", unlock);
@@ -126,5 +105,13 @@
         };
         document.addEventListener("click", unlock);
         document.addEventListener("keydown", unlock);
+
+        // Function to switch streams dynamically
+        window.playShow = (showId, name, description, imageUrl) => {
+            const streamUrl = `https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
+            document.getElementById("song-name").innerText = name;
+            document.getElementById("artist-name").innerText = description;
+            initHLS(streamUrl);
+        };
     });
 </script>
