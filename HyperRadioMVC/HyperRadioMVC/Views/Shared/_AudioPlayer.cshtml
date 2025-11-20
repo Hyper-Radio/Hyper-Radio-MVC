@@ -38,8 +38,8 @@
         const pauseBtn = document.getElementById("pause-btn");
         const volumeSlider = document.getElementById("volume");
 
-        // Default stream
-        const defaultStreamUrl = "https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/stream/live.m3u8";
+        // Default streamre
+        const defaultStreamUrl = "https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/";
 
         // Initialize HLS
         const initHLS = (url) => {
@@ -108,7 +108,7 @@
 
         // Function to switch streams dynamically
         window.playShow = (showId, name, description, imageUrl) => {
-            const streamUrl = `https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
+            const streamUrl = `https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
             document.getElementById("song-name").innerText = name;
             document.getElementById("artist-name").innerText = description;
             initHLS(streamUrl);
