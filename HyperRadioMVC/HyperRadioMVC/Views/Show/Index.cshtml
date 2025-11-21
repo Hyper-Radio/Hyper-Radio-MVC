@@ -2,11 +2,6 @@
 
 <link rel="stylesheet" href="~/css/pitch.css" asp-append-version="true" />
 
-@{
-ViewBag.Title = "Create A Show";
-Layout = "_Layout";
-}
-
 <div class="form">
     <h1 class="form-title">Create a Show</h1>
 
@@ -52,87 +47,80 @@ Layout = "_Layout";
     </form>
 </div>
 
-@section Scripts {
 <script>
-    document.addEventListener("DOMContentLoaded", async () => {
-        const steps = document.querySelectorAll(".form-step");
-        const nextBtns = document.querySelectorAll(".next-btn");
-        const backBtns = document.querySelectorAll(".back-btn");
-        const container = document.getElementById("track-select-container");
-        const addBtn = document.getElementById("add-track-btn");
-        const apiUrl = "/Show/GetTracks"; // proxy endpoint
+window.onAjaxLoad = async function () {
+    const steps = document.querySelectorAll(".form-step");
+    const nextBtns = document.querySelectorAll(".next-btn");
+    const backBtns = document.querySelectorAll(".back-btn");
+    const container = document.getElementById("track-select-container");
+    const addBtn = document.getElementById("add-track-btn");
+    const apiUrl = "/Show/GetTracks";
 
-        let tracks = [];
+    let tracks = [];
 
-        // ===== Step Navigation =====
-        let currentStep = 0;
-        function showStep(index) {
-            steps.forEach((step, i) => step.classList.toggle("active", i === index));
+    let currentStep = 0;
+    function showStep(index) {
+        steps.forEach((step, i) => step.classList.toggle("active", i === index));
+    }
+
+    nextBtns.forEach(btn => btn.addEventListener("click", () => {
+        currentStep = Math.min(currentStep + 1, steps.length - 1);
+        showStep(currentStep);
+    }));
+
+    backBtns.forEach(btn => btn.addEventListener("click", () => {
+        currentStep = Math.max(currentStep - 1, 0);
+        showStep(currentStep);
+    }));
+
+    // Fetch Tracks
+    async function fetchTracks() {
+        try {
+            const res = await fetch(apiUrl);
+            if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
+            tracks = await res.json();
+        } catch (err) {
+            console.error(err);
+            alert("Could not load tracks.");
         }
+    }
 
-        nextBtns.forEach(btn => btn.addEventListener("click", () => {
-            currentStep = Math.min(currentStep + 1, steps.length - 1);
-            showStep(currentStep);
-        }));
+    function populateDropdown(select) {
+        select.innerHTML = '<option value="">Select a track</option>';
+        tracks.forEach(track => {
+            const opt = document.createElement("option");
+            opt.value = track.id;
+            opt.textContent = `${track.title} (${track.genre || "Unknown"})`;
+            select.appendChild(opt);
+        });
+    }
 
-        backBtns.forEach(btn => btn.addEventListener("click", () => {
-            currentStep = Math.max(currentStep - 1, 0);
-            showStep(currentStep);
-        }));
+    function addTrackDropdown() {
+        const wrapper = document.createElement("div");
+        wrapper.className = "track-select flex items-center space-x-2";
 
-        // ===== Fetch Tracks =====
-        async function fetchTracks() {
-            try {
-                const res = await fetch(apiUrl);
-                if (!res.ok) throw new Error(`Failed to fetch: ${res.status}`);
-                tracks = await res.json();
-                console.log("✅ Loaded tracks:", tracks);
-            } catch (err) {
-                console.error("❌ Error fetching tracks:", err);
-                alert("Could not load tracks from the server.");
-            }
-        }
+        const select = document.createElement("select");
+        select.name = "TrackIds";
+        select.className = "form-select track-dropdown";
+        select.required = true;
+        populateDropdown(select);
 
-        // ===== Populate a Dropdown =====
-        function populateDropdown(select) {
-            select.innerHTML = '<option value="">Select a track</option>';
-            tracks.forEach(track => {
-                const opt = document.createElement("option");
-                opt.value = track.id;
-                opt.textContent = `${track.title} (${track.genre || "Unknown"})`;
-                select.appendChild(opt);
-            });
-        }
+        const removeBtn = document.createElement("button");
+        removeBtn.type = "button";
+        removeBtn.textContent = "Remove";
+        removeBtn.className = "form-btn back-btn";
+        removeBtn.addEventListener("click", () => wrapper.remove());
 
-        // ===== Add Track Dropdown =====
-        function addTrackDropdown() {
-            const wrapper = document.createElement("div");
-            wrapper.className = "track-select flex items-center space-x-2";
+        wrapper.appendChild(select);
+        wrapper.appendChild(removeBtn);
+        container.appendChild(wrapper);
+    }
 
-            const select = document.createElement("select");
-            select.name = "TrackIds";
-            select.className = "form-select track-dropdown";
-            select.required = true;
-            populateDropdown(select);
+    await fetchTracks();
 
-            const removeBtn = document.createElement("button");
-            removeBtn.type = "button";
-            removeBtn.textContent = "Remove";
-            removeBtn.className = "form-btn back-btn";
-            removeBtn.addEventListener("click", () => wrapper.remove());
+    const firstDropdown = document.querySelector(".track-dropdown");
+    if (firstDropdown) populateDropdown(firstDropdown);
 
-            wrapper.appendChild(select);
-            wrapper.appendChild(removeBtn);
-            container.appendChild(wrapper);
-        }
-
-        // ===== Initialize =====
-        await fetchTracks();
-
-        const firstDropdown = document.querySelector(".track-dropdown");
-        if (firstDropdown) populateDropdown(firstDropdown);
-
-        addBtn.addEventListener("click", addTrackDropdown);
-    });
+    addBtn.addEventListener("click", addTrackDropdown);
+};
 </script>
-}
