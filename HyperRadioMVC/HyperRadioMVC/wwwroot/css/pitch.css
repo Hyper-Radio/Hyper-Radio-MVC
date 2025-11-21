@@ -1,6 +1,7 @@
 .form {
-    max-width: 1300px;
-    margin: 140px 380px 200px;
+    width: 100%;
+    max-width: 900px;
+    margin: 120px auto;  /* Centered, no side overflow issues */
     background-color: #111;
     padding: 2rem 2.5rem;
     border-radius: 12px;
@@ -8,6 +9,11 @@
     color: white;
     font-family: 'Inter', sans-serif;
     box-sizing: border-box;
+
+    /* KEY FIXES */
+    max-height: calc(100vh - 220px); /* Keep inside viewport */
+    overflow-y: auto;                /* Scroll when needed */
+    overflow-x: hidden;
 }
 
 /* ====== Base Styling ====== */
