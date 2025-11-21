@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - Hyper Radio</title>
-
+    
+    <link rel="manifest" href="~/manifest.json" />
     <link rel="icon" type="image/x-icon" href="~/favicon.svg" />
     <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
-    
     
     
     <!-- ============================
@@ -49,7 +49,7 @@
 
 <!-- Favicons -->
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="manifest" href="/manifest.json" />
 
 <!-- PWA Friendly -->
@@ -109,39 +109,76 @@
 
 <!-- HLS.js -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<script src="https://unpkg.com/htmx.org@1.9.10"></script>
 
 <!-- AJAX Page Loader (updates only #main-content) -->
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        const mainContent = document.getElementById("main-content");
+document.addEventListener("DOMContentLoaded", () => {
+    const mainContent = document.getElementById("main-content");
 
-        async function loadPage(url, pushState = true) {
-            const res = await fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } });
-            if (!res.ok) return;
-            const html = await res.text();
-            const doc = new DOMParser().parseFromString(html, "text/html");
-            const newContent = doc.querySelector("#main-content");
-            if (newContent) mainContent.innerHTML = newContent.innerHTML;
-            if (pushState) window.history.pushState({}, "", url);
+    async function loadPage(url, pushState = true) {
+        const res = await fetch(url, { headers: { "X-Requested-With": "XMLHttpRequest" } });
+        if (!res.ok) return;
 
-            // Optional: re-run page-specific scripts if needed
-            if (typeof window.onAjaxLoad === "function") window.onAjaxLoad();
+        const html = await res.text();
+        const doc = new DOMParser().parseFromString(html, "text/html");
+
+        const newContent = doc.querySelector("#main-content");
+        if (!newContent) return;
+
+        // 1️⃣ Replace content
+        mainContent.innerHTML = newContent.innerHTML;
+
+        // Re-enable HTMX triggers inside the replaced content
+        if (window.htmx) {
+            htmx.process(mainContent);
         }
 
-        document.body.addEventListener("click", e => {
-            const link = e.target.closest("a.ajax-link");
-            if (!link) return;
-            e.preventDefault();
-            const url = link.getAttribute("href");
-            if (url) loadPage(url);
+        
+        // 2️⃣ Extract all script tags
+        const scripts = newContent.querySelectorAll("script");
+
+        scripts.forEach((oldScript) => {
+            const newScript = document.createElement("script");
+
+            // Copy attributes (src, type…)
+            [...oldScript.attributes].forEach(attr =>
+                newScript.setAttribute(attr.name, attr.value)
+            );
+
+            // Inline script code
+            if (!oldScript.src) newScript.textContent = oldScript.innerHTML;
+
+            // 3️⃣ Run it
+            document.body.appendChild(newScript);
         });
 
-        window.addEventListener("popstate", () => loadPage(window.location.pathname, false));
+        // 4️⃣ Run page hook (optional)
+        if (typeof window.onAjaxLoad === "function") {
+            window.onAjaxLoad();
+        }
+
+        // 5️⃣ Update browser URL
+        if (pushState) window.history.pushState({}, "", url);
+    }
+
+    // Link handling
+    document.body.addEventListener("click", e => {
+        const link = e.target.closest("a.ajax-link");
+        if (!link) return;
+
+        e.preventDefault();
+        loadPage(link.getAttribute("href"));
     });
+
+    // Handle back/forward buttons
+    window.addEventListener("popstate", () => {
+        loadPage(window.location.pathname, false);
+    });
+});
 </script>
 
 <!-- Audio Player Script -->
-<script src="~/js/audio-player.js" asp-append-version="true"></script>
 
 @await RenderSectionAsync("Scripts", required: false)
 </body>
