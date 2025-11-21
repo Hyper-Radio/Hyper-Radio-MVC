@@ -69,6 +69,42 @@ document.addEventListener("DOMContentLoaded", () => {
         playBtn.classList.add("hidden");
         pauseBtn.classList.remove("hidden");
     });
+    document.addEventListener("DOMContentLoaded", () => {
+        // Single HLS instance
+        let hls;
+        const audio = document.getElementById("audio");
+        const playBtn = document.getElementById("play-btn");
+        const pauseBtn = document.getElementById("pause-btn");
+        const volumeSlider = document.getElementById("volume");
+
+        // Default streamre
+        const defaultStreamUrl = "https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/";
+
+        // Initialize HLS
+        const initHLS = (url) => {
+            if (hls) {
+                hls.destroy(); // Clean up previous HLS instance
+            }
+
+            if (Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audio);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => {
+                    console.log("✅ HLS manifest parsed, ready to play.");
+                    audio.play().catch(() => {}); // handle autoplay restrictions
+                });
+                hls.on(Hls.Events.ERROR, (event, data) => {
+                    console.error("❌ HLS error:", data);
+                });
+            } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+                audio.src = url;
+                audio.play().catch(() => {});
+            }
+        };
+
+        // Play default stream on load
+        initHLS(defaultStreamUrl);
 
     pauseBtn.addEventListener("click", () => {
         if (hls) hls.stopLoad();
@@ -104,4 +140,12 @@ document.addEventListener("DOMContentLoaded", () => {
         initHLS(streamUrl);
     };
 });
+        // Function to switch streams dynamically
+        window.playShow = (showId, name, description, imageUrl) => {
+            const streamUrl = `https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
+            document.getElementById("song-name").innerText = name;
+            document.getElementById("artist-name").innerText = description;
+            initHLS(streamUrl);
+        };
+    });
 </script>
