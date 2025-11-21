@@ -1,3 +1,4 @@
+@using System.Web
 @model IEnumerable<HyperRadioMVC.Models.ShowDetails>
 
 <link rel="stylesheet" href="~/css/artistprofile.css" asp-append-version="true" />
@@ -14,17 +15,17 @@
         <div class="shows-list">
             @foreach (var show in Model)
             {
-                <a href="#" 
-                   onclick="playShow(@show.Id, '@show.Name', '@show.Description', '@show.ImageUrl')" 
+                <a href="#"
+                   onclick="playShow(
+       @show.Id,
+       '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
+       '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))',
+       '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.ImageUrl))'
+   )"
                    class="show-card-horizontal">
 
                     <div class="show-image" style="background-image: url('@show.ImageUrl');">
                         <div class="overlay"></div>
-
-                        <!-- Play button overlay -->
-                        <div class="play-overlay">
-                            <img src="/play.svg" class="play-icon" alt="Play">
-                        </div>
                     </div>
 
                     <div class="show-info">

@@ -82,7 +82,7 @@ namespace HyperRadioMVC.Controllers
                 {
                     show = new ShowDetailsVM
                     {
-                        Name = "Indie Music Show",
+                        Name = "Default Music Show",
                         Description = "Weekly electronic music broadcast featuring indie and electronic artists from around the world.",
                         ScheduledStart = DateTime.UtcNow
                     };
@@ -97,7 +97,7 @@ namespace HyperRadioMVC.Controllers
 
                 var fallbackShow = new ShowDetailsVM
                 {
-                    Name = "Indie Music Show",
+                    Name = "Default Music Show",
                     Description = "Weekly electronic music broadcast featuring indie and electronic artists from around the world.",
                     ScheduledStart = DateTime.UtcNow
                 };

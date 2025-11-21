@@ -1,9 +1,11 @@
-<link rel="stylesheet" href="css/player.css" asp-append-version="true"/>
+@* Refactored Persistent Audio Player *@
+<link rel="stylesheet" href="~/css/player.css" asp-append-version="true"/>
 
 <footer id="audio-player">
     <!-- Hidden audio element -->
     <audio id="audio" preload="none"></audio>
 
+    <!-- Now Playing Section -->
     <div class="player-section now-playing">
         <span class="label">Now Playing:</span>
         <div>
@@ -12,6 +14,7 @@
         </div>
     </div>
 
+    <!-- Play / Pause Controls -->
     <div class="player-section player-controls">
         <button id="play-btn" class="control-btn">
             <img src="/play.svg" alt="Play" class="icon"/>
@@ -21,97 +24,84 @@
         </button>
     </div>
 
+    <!-- Volume Control -->
     <div class="player-section player-volume">
         <input id="volume" type="range" min="0" max="1" step="0.05" value="1"/>
     </div>
 </footer>
 
-<!-- HLS.js -->
+<!-- HLS.js for streaming -->
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
-        // Single HLS instance
-        let hls;
-        const audio = document.getElementById("audio");
-        const playBtn = document.getElementById("play-btn");
-        const pauseBtn = document.getElementById("pause-btn");
-        const volumeSlider = document.getElementById("volume");
+document.addEventListener("DOMContentLoaded", () => {
+    let hls;
+    const audio = document.getElementById("audio");
+    const playBtn = document.getElementById("play-btn");
+    const pauseBtn = document.getElementById("pause-btn");
+    const volumeSlider = document.getElementById("volume");
 
-        // Default stream
-        const defaultStreamUrl = "https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/stream/live.m3u8";
-
-        // Initialize HLS
-        const initHLS = (url) => {
-            if (hls) {
-                hls.destroy(); // Clean up previous HLS instance
-            }
-
-            if (Hls.isSupported()) {
-                hls = new Hls();
-                hls.loadSource(url);
-                hls.attachMedia(audio);
-                hls.on(Hls.Events.MANIFEST_PARSED, () => {
-                    console.log("✅ HLS manifest parsed, ready to play.");
-                    audio.play().catch(() => {}); // handle autoplay restrictions
-                });
-                hls.on(Hls.Events.ERROR, (event, data) => {
-                    console.error("❌ HLS error:", data);
-                });
-            } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
-                audio.src = url;
-                audio.play().catch(() => {});
-            }
-        };
-
-        // Play default stream on load
-        initHLS(defaultStreamUrl);
-
-        // Play/pause button handlers
-        playBtn.addEventListener("click", async () => {
-            if (hls) hls.startLoad();
-            await audio.play().catch(err => console.warn("Playback blocked:", err));
-            playBtn.classList.add("hidden");
-            pauseBtn.classList.remove("hidden");
-        });
-
-        pauseBtn.addEventListener("click", () => {
-            if (hls) hls.stopLoad();
-            audio.pause();
-            pauseBtn.classList.add("hidden");
-            playBtn.classList.remove("hidden");
-        });
-
-        // Sync button states with manual play/pause
-        audio.addEventListener("play", () => {
-            playBtn.classList.add("hidden");
-            pauseBtn.classList.remove("hidden");
-        });
-        audio.addEventListener("pause", () => {
-            pauseBtn.classList.add("hidden");
-            playBtn.classList.remove("hidden");
-        });
-
-        // Volume control
-        volumeSlider.addEventListener("input", e => {
-            audio.volume = e.target.value;
-        });
-
-        // Unlock playback on first interaction (required by some browsers)
-        const unlock = () => {
+    // Default streamre
+    const defaultStreamUrl = "https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/";
+    
+    // Initialize HLS stream
+    const initHLS = (url) => {
+        if (hls) hls.destroy();
+        if (Hls.isSupported()) {
+            hls = new Hls();
+            hls.loadSource(url);
+            hls.attachMedia(audio);
+            hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play().catch(() => {}));
+            hls.on(Hls.Events.ERROR, (event, data) => console.error("HLS error:", data));
+        } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+            audio.src = url;
             audio.play().catch(() => {});
-            document.removeEventListener("click", unlock);
-            document.removeEventListener("keydown", unlock);
-        };
-        document.addEventListener("click", unlock);
-        document.addEventListener("keydown", unlock);
+        }
+    };
 
-        // Function to switch streams dynamically
-        window.playShow = (showId, name, description, imageUrl) => {
-            const streamUrl = `https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
-            document.getElementById("song-name").innerText = name;
-            document.getElementById("artist-name").innerText = description;
-            initHLS(streamUrl);
-        };
+    // Start default stream
+    initHLS(defaultStreamUrl);
+
+    // Play / Pause button functionality
+    playBtn.addEventListener("click", async () => {
+        if (hls) hls.startLoad();
+        await audio.play().catch(() => {});
+        playBtn.classList.add("hidden");
+        pauseBtn.classList.remove("hidden");
     });
+
+    pauseBtn.addEventListener("click", () => {
+        if (hls) hls.stopLoad();
+        audio.pause();
+        pauseBtn.classList.add("hidden");
+        playBtn.classList.remove("hidden");
+    });
+
+    // Sync button states
+    audio.addEventListener("play", () => {
+        playBtn.classList.add("hidden");
+        pauseBtn.classList.remove("hidden");
+    });
+    audio.addEventListener("pause", () => {
+        pauseBtn.classList.add("hidden");
+        playBtn.classList.remove("hidden");
+    });
+
+    // Volume control
+    volumeSlider.addEventListener("input", e => audio.volume = e.target.value);
+
+    // Unlock autoplay restrictions
+    const unlock = () => { audio.play().catch(() => {}); };
+    document.addEventListener("click", unlock, { once: true });
+    document.addEventListener("keydown", unlock, { once: true });
+
+    // Switch streams dynamically
+    window.playShow = (showId, name, description) => {
+        const streamUrl = `https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
+
+        document.getElementById("song-name").innerText = name;
+        document.getElementById("artist-name").innerText = description;
+        initHLS(streamUrl);
+    };
+});
 </script>
