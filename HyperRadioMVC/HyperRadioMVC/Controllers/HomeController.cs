@@ -66,7 +66,7 @@ namespace HyperRadioMVC.Controllers
             }
         }
 
-        // === Partial for LEFT PANEL (Show Details) ===
+        // Left panel partial (show details)
         [HttpGet]
         public async Task<IActionResult> ShowDetails()
         {
@@ -77,7 +77,7 @@ namespace HyperRadioMVC.Controllers
                 // Fetch data from the API
                 var show = await client.GetFromJsonAsync<ShowDetailsVM>("https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/stream/live/info"); //Update this to Azure location
 
-                // If API returns null, fallback to default
+                // If API returns null, default fallback
                 if (show == null)
                 {
                     show = new ShowDetailsVM
@@ -92,7 +92,7 @@ namespace HyperRadioMVC.Controllers
             }
             catch (Exception ex)
             {
-                // Log error and fallback
+                // Log error
                 Console.WriteLine($"Error fetching show info: {ex.Message}");
 
                 var fallbackShow = new ShowDetailsVM
@@ -106,7 +106,7 @@ namespace HyperRadioMVC.Controllers
             }
         }
 
-        // === Partial for RIGHT PANEL alternative (Shows List) ===
+        // Right panel Partial (List of shows)
         [HttpGet]
         public async Task<IActionResult> Shows()
         {
@@ -114,7 +114,7 @@ namespace HyperRadioMVC.Controllers
 
             try
             {
-                // Call your API endpoint
+                // Call API
                 var shows = await client.GetFromJsonAsync<List<ShowDetails>>("https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/shows"); //Update to Azure location
 
                 if (shows == null)
@@ -126,14 +126,13 @@ namespace HyperRadioMVC.Controllers
             }
             catch (Exception ex)
             {
-                // Handle errors gracefully
                 Console.WriteLine(ex.Message);
                 return PartialView("_Shows", new List<ShowDetails>());
             }
         }
         
         
-        // === Helper ===
+        // Helper so that first time it loads (before any track is loaded) there is a default, this ensures the UI doesnt break
         private HomeVM BuildHomeViewModel()
         {
             return new HomeVM

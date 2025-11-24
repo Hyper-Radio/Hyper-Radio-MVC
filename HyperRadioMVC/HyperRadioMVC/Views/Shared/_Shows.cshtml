@@ -15,25 +15,66 @@
         <div class="shows-list">
             @foreach (var show in Model)
             {
-                <a href="#"
-                   onclick="playShow(
-       @show.Id,
-       '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
-       '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))',
-       '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.ImageUrl))'
-   )"
-                   class="show-card-horizontal">
-
-                    <div class="show-image" style="background-image: url('@show.ImageUrl');">
-                        <div class="overlay"></div>
-                    </div>
-
-                    <div class="show-info">
-                        <h3 class="show-title">@show.Name</h3>
-                        <p class="show-description">@show.Description</p>
-                    </div>
-                </a>
+            <div class="show-card">
+                <div class="show-info">
+                    <h3 class="show-title">@show.Name</h3>
+                    <p class="show-description">@show.Description</p>
+                    <button class="play-btn"
+                            onclick="window.playShow(
+                            @show.Id,
+                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
+                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))',
+                                '' 
+                                )">
+                        Play Show
+                    </button>
+                </div>
+            </div>
             }
         </div>
     </div>
 </div>
+
+<style>
+    .show-card {
+        background-color: #494949;
+        border-radius: 8px;
+        padding: 1rem;
+        margin-bottom: 1rem;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .show-card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    }
+
+    .show-info h3 {
+        margin: 0 0 0.25rem 0;
+        font-size: 1.2rem;
+        color: #fff;
+    }
+
+    .show-info p {
+        margin: 0 0 0.75rem 0;
+        font-size: 0.95rem;
+        color: #ddd;
+    }
+
+    .play-btn {
+        background: linear-gradient(90deg, #ff7e5f, #feb47b);
+        color: white;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 25px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: background 0.3s, transform 0.2s;
+    }
+
+    .play-btn:hover {
+        background: linear-gradient(90deg, #feb47b, #ff7e5f);
+        transform: translateY(-2px);
+    }
+</style>
