@@ -1,5 +1,6 @@
 @using System.Web
 @model IEnumerable<HyperRadioMVC.Models.ShowDetails>
+@using System.Text.Json
 
 <link rel="stylesheet" href="~/css/artistprofile.css" asp-append-version="true" />
 
@@ -20,10 +21,7 @@
                         <h3 class="show-title">@show.Name</h3>
                         <p class="show-description">@show.Description</p>
                         <button class="play-btn"
-                                onclick="handlePlayShow(
-                                @show.Id,
-                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
-                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))')">
+                                onclick='handlePlayShow(@show.Id, @Html.Raw(Json.Serialize(show.Name)), @Html.Raw(Json.Serialize(show.Description)))'>
                             Play Show
                         </button>
                     </div>
