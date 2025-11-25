@@ -15,25 +15,43 @@
         <div class="shows-list">
             @foreach (var show in Model)
             {
-            <div class="show-card">
-                <div class="show-info">
-                    <h3 class="show-title">@show.Name</h3>
-                    <p class="show-description">@show.Description</p>
-                    <button class="play-btn"
-                            onclick="window.playShow(
-                            @show.Id,
-                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
-                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))',
-                                '' 
-                                )">
-                        Play Show
-                    </button>
+                <div class="show-card">
+                    <div class="show-info">
+                        <h3 class="show-title">@show.Name</h3>
+                        <p class="show-description">@show.Description</p>
+                    
+                        <button class="play-btn"
+                                onclick="handlePlayShow(@show.Id,
+                            '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
+                            '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))')">
+                            Play Show
+                        </button>
+                    </div>
                 </div>
-            </div>
             }
         </div>
     </div>
 </div>
+<script>
+    async function handlePlayShow(id, name, description) {
+
+        // 1. Play the show (your existing function)
+        if (window.playShow) {
+            window.playShow(id, name, description, "");
+        }
+
+        // 2. Update Show Details panel
+        try {
+            const response = await fetch(`/Home/GetShowDetails?id=${id}`);
+            const html = await response.text();
+
+            document.querySelector("#show-details-panel").innerHTML = html;
+        } 
+        catch (e) {
+            console.error("Failed to update show details:", e);
+        }
+    }
+</script>
 
 <style>
     .show-card {
