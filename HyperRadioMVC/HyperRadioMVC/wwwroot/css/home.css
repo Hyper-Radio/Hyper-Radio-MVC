@@ -1,3 +1,4 @@
+/* ---------- Split View Container ---------- */
 .split-view {
     display: flex;
     height: 100vh;
@@ -6,7 +7,7 @@
     overflow: hidden;
 }
 
-/* Desktop layout (side by side) */
+/* ---------- Left Panel (Current Show Details) ---------- */
 .left-panel {
     position: fixed;
     top: 0;
@@ -14,10 +15,51 @@
     width: 50%;
     height: 100vh;
     background-color: #ff3838;
-    padding: 1.5rem;
-    overflow-y: hidden;
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* horizontally center content */
+    justify-content: center;   /* vertically center content */
+    overflow-y: auto;          /* scroll if content taller than viewport */
 }
 
+/* ShowDetails container */
+.left-panel .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+    box-sizing: border-box;
+}
+
+.left-panel .show-time h5 {
+    color: #ccc;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+
+.left-panel .show-title h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.left-panel .show-description p {
+    font-size: 1rem;
+    line-height: 1.4;
+    color: #ddd;
+    text-align: center;
+}
+
+/* ---------- Right Panel (Artist / Shows) ---------- */
 .right-panel {
     margin-left: 50%;
     width: 50%;
@@ -55,9 +97,37 @@
         margin: 0;
         padding: 1rem;
         overflow-y: visible;
+        justify-content: flex-start; /* don't vertically center on mobile */
+        align-items: flex-start;     /* align content to left */
+    }
+
+    .left-panel .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 1rem;
+        border-radius: 6px;
+    }
+
+    .left-panel .show-title h2,
+    .left-panel .show-description p,
+    .left-panel .show-time h5 {
+        text-align: left;
     }
 
     .right-panel {
-        order: -1; /* ensures right panel appears above left */
+        order: -1; /* right panel appears above left panel */
+    }
+}
+
+@media (max-width: 768px) {
+    /* Add spacing at bottom so content isn't hidden behind footer */
+    .left-panel,
+    .right-panel {
+        padding-bottom: 120px; /* slightly more than footer height */
+    }
+
+    /* Optional: make footer slightly smaller on mobile */
+    .footer {
+        height: 80px;
     }
 }
