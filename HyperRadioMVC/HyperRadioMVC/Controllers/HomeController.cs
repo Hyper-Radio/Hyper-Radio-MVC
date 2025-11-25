@@ -169,9 +169,7 @@ namespace HyperRadioMVC.Controllers
             }
         }
 
-        // =========================
-        // DEFAULT HOME VIEW MODEL
-        // =========================
+        // Helper that loads a default view so UI doesnt break
         private HomeVM BuildHomeViewModel()
         {
             return new HomeVM
@@ -189,6 +187,45 @@ namespace HyperRadioMVC.Controllers
                     ScheduledStart = DateTime.UtcNow
                 }
             };
+            
+        }
+        
+        // AJAX: Load Now Playing Artist based on show
+        [HttpGet]
+        public async Task<IActionResult> GetNowPlayingArtist(int showId)
+        {
+            var client = _httpClientFactory.CreateClient();
+
+            // For demo: map showId -> artistId
+            int artistId = showId; // simple mapping; adjust if you want random
+
+            try
+            {
+                var artist = await client.GetFromJsonAsync<ArtistProfileVM>(
+                    $"https://hyper-radio-api-ezgpemf9d5g2cuc0.norwayeast-01.azurewebsites.net/api/Creators/{artistId}"
+                );
+
+                if (artist == null)
+                {
+                    artist = new ArtistProfileVM
+                    {
+                        Name = "Unknown Artist",
+                        Description = "No artist info available.",
+                        ImageUrl = "https://via.placeholder.com/200"
+                    };
+                }
+
+                return PartialView("_ArtistProfile", artist);
+            }
+            catch
+            {
+                return PartialView("_ArtistProfile", new ArtistProfileVM
+                {
+                    Name = "Error Loading Artist",
+                    Description = "Could not fetch artist info.",
+                    ImageUrl = "https://via.placeholder.com/200"
+                });
+            }
         }
     }
 }

@@ -33,22 +33,23 @@
     </div>
 </div>
 <script>
-    async function handlePlayShow(id, name, description) {
-
-        // 1. Play the show (your existing function)
-        if (window.playShow) {
-            window.playShow(id, name, description, "");
-        }
-
-        // 2. Update Show Details panel
+        async function handlePlayShow(showId, showName, showDescription, audioUrl) {
         try {
-            const response = await fetch(`/Home/GetShowDetails?id=${id}`);
-            const html = await response.text();
-
-            document.querySelector("#show-details-panel").innerHTML = html;
-        } 
-        catch (e) {
-            console.error("Failed to update show details:", e);
+            // Play audio (existing player)
+            window.playShow(showId, showName, showDescription, audioUrl);
+    
+            // Update Show Details
+            const showResp = await fetch(`/Home/GetShowDetails?id=${showId}`);
+            const showHtml = await showResp.text();
+            document.getElementById("show-details-container").innerHTML = showHtml;
+    
+            // Update Now Playing Artist
+            const artistResp = await fetch(`/Home/GetNowPlayingArtist?showId=${showId}`);
+            const artistHtml = await artistResp.text();
+            document.getElementById("artist-profile-container").innerHTML = artistHtml;
+    
+        } catch (e) {
+            console.error("Failed to update show/artist:", e);
         }
     }
 </script>

@@ -1,14 +1,49 @@
+@* Side Navigation Tabs *@
 <link rel="stylesheet" href="~/css/artistprofile.css" asp-append-version="true" />
 
-
-
 <nav class="side-tabs">
-    <button class="tab" hx-get="/Home/ArtistProfile" hx-target=".right-panel" hx-swap="innerHTML">
+    <button class="tab" data-target="Now Playing" hx-get="/Home/ArtistProfile" hx-target=".right-panel" hx-swap="innerHTML">
         Now Playing
     </button>
-    <button class="tab" hx-get="/Home/Shows" hx-target=".right-panel" hx-swap="innerHTML">
-         Shows
+    <button class="tab" data-target="Shows" hx-get="/Home/Shows" hx-target=".right-panel" hx-swap="innerHTML">
+        Shows
     </button>
-  
-    
 </nav>
+
+<script>
+    (function() {
+        const tabs = document.querySelectorAll(".side-tabs .tab");
+
+        // Function to set active tab
+        const setActiveTab = (tabName) => {
+            tabs.forEach(t => {
+                t.classList.toggle("active", t.dataset.target === tabName);
+            });
+        };
+
+        // Click listener for tabs
+        tabs.forEach(tab => {
+            tab.addEventListener("click", () => {
+                setActiveTab(tab.dataset.target);
+            });
+        });
+
+        // HTMX listener to maintain active tab on swaps
+        document.body.addEventListener("htmx:afterSwap", (evt) => {
+            const target = evt.detail.target;
+            if (!target.classList.contains("right-panel")) return;
+
+            if (target.querySelector(".artist-profile-container")) {
+                setActiveTab("Now Playing");
+            } else if (target.querySelector(".shows-list")) {
+                setActiveTab("Shows");
+            }
+        });
+
+        // Optional: Set default active tab on load
+        setActiveTab("Now Playing");
+
+        // Expose globally if needed
+        window.setActiveTab = setActiveTab;
+    })();
+</script>

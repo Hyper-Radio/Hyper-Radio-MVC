@@ -1,3 +1,5 @@
+using System.Text.Json.Serialization;
+
 namespace HyperRadioMVC.ViewModels
 {
     public class HomeVM
@@ -8,8 +10,11 @@ namespace HyperRadioMVC.ViewModels
 
     public class ArtistProfileVM
     {
+        [JsonPropertyName("username")]
         public string Name { get; set; }
         public string Description { get; set; }
+        
+        [JsonPropertyName("profilePictureURL")]
         public string ImageUrl { get; set; }
     }
 
