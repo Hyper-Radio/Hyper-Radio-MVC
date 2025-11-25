@@ -1,4 +1,4 @@
-@* Persistent Audio Player *@
+@* Refactored Persistent Audio Player *@
 <link rel="stylesheet" href="~/css/player.css" asp-append-version="true"/>
 
 <footer id="audio-player">
@@ -29,39 +29,43 @@
 <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
 
 <script>
-(function() {
-    let hls;
-    const audio = document.getElementById("audio");
-    const playBtn = document.getElementById("play-btn");
-    const pauseBtn = document.getElementById("pause-btn");
-    const volumeSlider = document.getElementById("volume");
+    document.addEventListener("DOMContentLoaded", () => {
+        let hls;
+        const audio = document.getElementById("audio");
+        const playBtn = document.getElementById("play-btn");
+        const pauseBtn = document.getElementById("pause-btn");
+        const volumeSlider = document.getElementById("volume");
 
-    // Initialize HLS
-    function initHLS(url) {
-        if (hls) hls.destroy();
-        hls = null;
+        const initHLS = (url) => {
+            if (hls) hls.destroy();
 
-        if (Hls.isSupported()) {
-            hls = new Hls();
-            hls.loadSource(url);
-            hls.attachMedia(audio);
-            hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play().catch(()=>{}));
-            hls.on(Hls.Events.ERROR, (event, data) => console.error("HLS error:", data));
-        } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
-            audio.src = url;
-            audio.play().catch(()=>{});
-        }
-    }
+            if (Hls.isSupported()) {
+                hls = new Hls();
+                hls.loadSource(url);
+                hls.attachMedia(audio);
+                hls.on(Hls.Events.MANIFEST_PARSED, () => audio.play().catch(() => {}));
+                hls.on(Hls.Events.ERROR, (event, data) => console.error("HLS error:", data));
+            } else if (audio.canPlayType("application/vnd.apple.mpegurl")) {
+                audio.src = url;
+                audio.play().catch(() => {});
+            }
+        };
 
-    // Play/pause event listeners (only attach once)
-    if (!playBtn.dataset.listener) {
+        // Default stream URL (first show with tracks)
+        initHLS("https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/2");
+
         playBtn.addEventListener("click", async () => {
             if (hls) hls.startLoad();
-            await audio.play().catch(()=>{});
+            await audio.play().catch(() => {});
+            playBtn.classList.add("hidden");
+            pauseBtn.classList.remove("hidden");
         });
+
         pauseBtn.addEventListener("click", () => {
             if (hls) hls.stopLoad();
             audio.pause();
+            pauseBtn.classList.add("hidden");
+            playBtn.classList.remove("hidden");
         });
 
         audio.addEventListener("play", () => {
@@ -75,25 +79,16 @@
 
         volumeSlider.addEventListener("input", e => audio.volume = e.target.value);
 
-        playBtn.dataset.listener = "true"; // mark as initialized
-    }
+        const unlock = () => { audio.play().catch(() => {}); };
+        document.addEventListener("click", unlock, { once: true });
+        document.addEventListener("keydown", unlock, { once: true });
 
-    // Unlock autoplay on first interaction
-    const unlock = () => audio.play().catch(()=>{});
-    document.addEventListener("click", unlock, { once: true });
-    document.addEventListener("keydown", unlock, { once: true });
-
-    // Global function to play any show
-    window.playShow = (showId, name, description) => {
-        document.getElementById("song-name").innerText = name;
-        document.getElementById("artist-name").innerText = description;
-
-        const streamUrl = `https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
-        initHLS(streamUrl);
-        audio.play().catch(()=>{});
-    };
-
-    // Initialize default stream
-    initHLS("https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/2");
-})();
+        // Called from Shows partial
+        window.playShow = (showId, name, description) => {
+            const streamUrl = `https://hyper-radio-streamer-gqeaffc3cucfhxb8.norwayeast-01.azurewebsites.net/api/stream/live.m3u8/${showId}`;
+            document.getElementById("song-name").innerText = name;
+            document.getElementById("artist-name").innerText = description;
+            initHLS(streamUrl);
+        };
+    });
 </script>

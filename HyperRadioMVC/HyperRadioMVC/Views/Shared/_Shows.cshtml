@@ -19,11 +19,11 @@
                     <div class="show-info">
                         <h3 class="show-title">@show.Name</h3>
                         <p class="show-description">@show.Description</p>
-                    
                         <button class="play-btn"
-                                onclick="handlePlayShow(@show.Id,
-                            '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
-                            '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))')">
+                                onclick="handlePlayShow(
+                                @show.Id,
+                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Name))',
+                                '@Html.Raw(HttpUtility.JavaScriptStringEncode(show.Description))')">
                             Play Show
                         </button>
                     </div>
@@ -32,68 +32,77 @@
         </div>
     </div>
 </div>
+
+<style>
+.show-card {
+    background-color: #494949;
+    border-radius: 8px;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.show-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.show-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.show-info p {
+    margin: 0 0 0.75rem 0;
+    font-size: 0.95rem;
+    color: #ddd;
+}
+
+.play-btn {
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: background 0.3s, transform 0.2s;
+}
+
+.play-btn:hover {
+    background: linear-gradient(90deg, #feb47b, #ff7e5f);
+    transform: translateY(-2px);
+}
+</style>
+
+
 <script>
-        async function handlePlayShow(showId, showName, showDescription, audioUrl) {
+    async function handlePlayShow(id, name, description) {
         try {
-            // Play audio (existing player)
-            window.playShow(showId, showName, showDescription, audioUrl);
-    
-            // Update Show Details
-            const showResp = await fetch(`/Home/GetShowDetails?id=${showId}`);
-            const showHtml = await showResp.text();
-            document.getElementById("show-details-container").innerHTML = showHtml;
-    
-            // Update Now Playing Artist
-            const artistResp = await fetch(`/Home/GetNowPlayingArtist?showId=${showId}`);
+            // Play audio
+            window.playShow(id, name, description);
+
+            // Reload show details (left panel)
+            const response = await fetch(`/Home/GetShowDetails?id=${id}`);
+            const html = await response.text();
+            const container = document.getElementById("show-details-container");
+            if (container) container.innerHTML = html;
+
+            // Switch sidenav to "Now Playing"
+            if (window.setActiveTab) {
+                window.setActiveTab("Now Playing");
+            }
+
+            // Optionally, load the Now Playing artist in the right panel
+            const artistResp = await fetch(`/Home/GetNowPlayingArtist?showId=${id}`);
             const artistHtml = await artistResp.text();
-            document.getElementById("artist-profile-container").innerHTML = artistHtml;
-    
+            const artistContainer = document.getElementById("artist-profile-container");
+            if (artistContainer) artistContainer.innerHTML = artistHtml;
+
         } catch (e) {
-            console.error("Failed to update show/artist:", e);
+            console.error("Failed to update show details:", e);
         }
     }
 </script>
-
-<style>
-    .show-card {
-        background-color: #494949;
-        border-radius: 8px;
-        padding: 1rem;
-        margin-bottom: 1rem;
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-        transition: transform 0.2s, box-shadow 0.2s;
-    }
-
-    .show-card:hover {
-        transform: translateY(-3px);
-        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-    }
-
-    .show-info h3 {
-        margin: 0 0 0.25rem 0;
-        font-size: 1.2rem;
-        color: #fff;
-    }
-
-    .show-info p {
-        margin: 0 0 0.75rem 0;
-        font-size: 0.95rem;
-        color: #ddd;
-    }
-
-    .play-btn {
-        background: linear-gradient(90deg, #ff7e5f, #feb47b);
-        color: white;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 25px;
-        cursor: pointer;
-        font-size: 0.95rem;
-        transition: background 0.3s, transform 0.2s;
-    }
-
-    .play-btn:hover {
-        background: linear-gradient(90deg, #feb47b, #ff7e5f);
-        transform: translateY(-2px);
-    }
-</style>

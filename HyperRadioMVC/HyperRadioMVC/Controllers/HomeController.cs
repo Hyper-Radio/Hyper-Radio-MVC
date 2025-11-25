@@ -169,7 +169,9 @@ namespace HyperRadioMVC.Controllers
             }
         }
 
-        // Helper that loads a default view so UI doesnt break
+        // =========================
+        // DEFAULT HOME VIEW MODEL
+        // =========================
         private HomeVM BuildHomeViewModel()
         {
             return new HomeVM
@@ -187,8 +189,8 @@ namespace HyperRadioMVC.Controllers
                     ScheduledStart = DateTime.UtcNow
                 }
             };
-            
         }
+        
         
         // AJAX: Load Now Playing Artist based on show
         [HttpGet]
