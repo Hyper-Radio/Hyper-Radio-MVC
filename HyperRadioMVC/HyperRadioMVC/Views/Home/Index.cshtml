@@ -1,20 +1,13 @@
 ﻿@model HyperRadioMVC.ViewModels.HomeVM
 
 <link rel="stylesheet" href="~/css/home.css" asp-append-version="true"/>
- 
-
-@{
-    ViewData["Title"] = "Hyper Radio";
-    Layout = "_layout";
-}
-
 
 <div class="split-view">
-    <div class="left-panel show-details-panel">
+    <div class="left-panel show-details-panel" id="show-details-container">
         @Html.Partial("_ShowDetails", Model.ShowDetails)
     </div>
 
-    <div class="right-panel">
+    <div class="right-panel" id="artist-profile-container">
         @Html.Partial("_ArtistProfile", Model.ArtistProfile)
     </div>
 </div>
